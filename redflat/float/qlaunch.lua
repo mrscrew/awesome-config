@@ -93,7 +93,7 @@ local function default_style()
 		border_margin   = { 20, 20, 10, 10 },
 		appline         = { iwidth = 160, im = { 10, 10, 5, 5 }, igap = { 0, 0, 10, 10 }, lheight = 30 },
 		state           = { gap = 4, radius = 3, size = 10, height = 20, width = 20 },
-		configfile      = os.getenv("HOME") .. "/.cache/awesome/applist",
+		configfile      = os.getenv("HOME") .. "/.config/awesome/applist",
 		label_font      = "Sans 14",
 		border_width    = 2,
 		keytip          = { geometry = { width = 500 }, exit = false },

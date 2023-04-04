@@ -181,20 +181,16 @@ end))
 
 -- Software update indcator
 --------------------------------------------------------------------------------
-redflat.widget.updates:init({
-    command = env.updates
-})
+redflat.widget.updates:init({ command = env.updates })
 
 local updates = {}
 updates.widget = redflat.widget.updates()
 
-updates.buttons = awful.util.table.join(awful.button({}, 1, function()
-    redflat.widget.updates:toggle()
-end), awful.button({}, 2, function()
-    redflat.widget.updates:update(true)
-end), awful.button({}, 3, function()
-    redflat.widget.updates:toggle()
-end))
+updates.buttons = awful.util.table.join(
+	awful.button({ }, 1, function () redflat.widget.updates:toggle() end),
+	awful.button({ }, 2, function () redflat.widget.updates:update(true) end),
+	awful.button({ }, 3, function () redflat.widget.updates:toggle() end)
+)
 
 -- System resource monitoring widgets
 --------------------------------------------------------------------------------
@@ -339,9 +335,9 @@ awful.screen.connect_for_each_screen(function(s)
         { -- left widgets
             layout = wibox.layout.fixed.horizontal,
 
-            env.wrapper(layoutbox[s], "layoutbox", layoutbox.buttons),
-            separator,
             env.wrapper(mymenu.widget, "mainmenu", mymenu.buttons),
+            separator,
+            env.wrapper(layoutbox[s], "layoutbox", layoutbox.buttons),
             separator,
             env.wrapper(taglist[s], "taglist"),
             separator,
@@ -370,7 +366,7 @@ awful.screen.connect_for_each_screen(function(s)
             separator,
             env.wrapper(sysmon.widget.network, "network"),
             separator,
-            env.wrapper(updates.widget, "updates"),
+            env.wrapper(updates.widget, "updates", updates.buttons),
             separator,
             env.wrapper(textclock.widget, "textclock"),
             separator,

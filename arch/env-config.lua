@@ -26,7 +26,10 @@ function env:init(args)
 
 	-- environment vars
 	self.terminal = args.terminal or "alacritty"
+
 	self.mod = args.mod or "Mod4"
+	self.alt = args.alt or "Alt_L"
+	self.tab = args.tab or "Tab"
 	self.fm = args.fm or "thunar"
 	self.updates = args.updates or "bash -c 'pacman -Qu | grep -v ignored | wc -l'"
 	self.home = os.getenv("HOME")

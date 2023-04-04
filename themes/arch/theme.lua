@@ -11,7 +11,7 @@ local theme = require("themes/colored/theme")
 -----------------------------------------------------------------------------------------------------------------------
 theme.color = {
     -- main colors
-    main = "#02606D",
+    main = "#007acc",
     gray = "#575757",
     bg = "#161616",
     bg_second = "#181818",
@@ -753,7 +753,9 @@ function theme:init()
     -- System updates indicator
     ------------------------------------------------------------
     self.widget.updates = {
-        icon = self.icon.system, -- widget icon
+        -- System updates indicator
+        icon = theme.path .. "/widget/updates.svg",
+      --icon = self.icon.system, -- widget icon
         notify = {}, -- redflat notify style (see theme.float.notify)
         need_notify = true, -- show notification on updates
         firstrun = true, -- check updates on wm start/restart

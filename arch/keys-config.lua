@@ -199,13 +199,13 @@ function hotkeys:init(args)
     local apprunner_keys_move = {{{env.mod}, "k", function()
         apprunner:down()
     end, {
-        description = "Select next item",
-        group = "Navigation"
+        description = "Выбрать следующий элемент",
+        group = "Навигация"
     }}, {{env.mod}, "i", function()
         apprunner:up()
     end, {
-        description = "Select previous item",
-        group = "Navigation"
+        description = "Выбрать предыдущий элемент",
+        group = "Навигация"
     }}}
 
     -- apprunner:set_keys(awful.util.table.join(apprunner.keys.move, apprunner_keys_move), "move")
@@ -214,17 +214,17 @@ function hotkeys:init(args)
     -- Menu widget
     ------------------------------------------------------------
     local menu_keys_move = {{{env.mod}, "k", redflat.menu.action.down, {
-        description = "Select next item",
-        group = "Navigation"
+        description = "Выбрать следующий элемент",
+        group = "Навигация"
     }}, {{env.mod}, "i", redflat.menu.action.up, {
-        description = "Select previous item",
-        group = "Navigation"
+        description = "Выбрать предыдущий элемент",
+        group = "Навигация"
     }}, {{env.mod}, "j", redflat.menu.action.back, {
-        description = "Go back",
-        group = "Navigation"
+        description = "Назад",
+        group = "Навигация"
     }}, {{env.mod}, "l", redflat.menu.action.enter, {
-        description = "Open submenu",
-        group = "Navigation"
+        description = "Открыть подменю",
+        group = "Навигация"
     }}}
 
     -- redflat.menu:set_keys(awful.util.table.join(redflat.menu.keys.move, menu_keys_move), "move")
@@ -235,8 +235,8 @@ function hotkeys:init(args)
     local appswitcher_keys = {{{env.mod}, "a", function()
         appswitcher:switch()
     end, {
-        description = "Select next app",
-        group = "Navigation"
+        description = "Выбрать следующее приложение",
+        group = "Навигация"
     }}, {{env.mod, "Shift"}, "a", function()
         appswitcher:switch()
     end, {} -- hidden key
@@ -245,8 +245,8 @@ function hotkeys:init(args)
             reverse = true
         })
     end, {
-        description = "Select previous app",
-        group = "Navigation"
+        description = "Выбрать предыдущее приложение",
+        group = "Навигация"
     }}, {{env.mod, "Shift"}, "q", function()
         appswitcher:switch({
             reverse = true
@@ -255,8 +255,8 @@ function hotkeys:init(args)
     }, {{}, "Super_L", function()
         appswitcher:hide()
     end, {
-        description = "Activate and exit",
-        group = "Action"
+        description = "Активировать и выйти",
+        group = "Действие"
     }}, {{env.mod}, "Super_L", function()
         appswitcher:hide()
     end, {} -- hidden key
@@ -266,21 +266,21 @@ function hotkeys:init(args)
     }, {{}, "Return", function()
         appswitcher:hide()
     end, {
-        description = "Activate and exit",
-        group = "Action"
+        description = "Активировать и выйти",
+        group = "Действие"
     }}, {{}, "Escape", function()
         appswitcher:hide(true)
     end, {
         description = "Exit",
-        group = "Action"
+        group = "Действие"
     }}, {{env.mod}, "Escape", function()
         appswitcher:hide(true)
     end, {} -- hidden key
     }, {{env.mod}, "F1", function()
         redtip:show()
     end, {
-        description = "Show hotkeys helper",
-        group = "Action"
+        description = "Показать помощник по горячим клавишам",
+        group = "Действие"
     }}}
 
     appswitcher:set_keys(appswitcher_keys)
@@ -306,15 +306,15 @@ function hotkeys:init(args)
         table.insert(keyseq[3][5][3], {{}, ik, function()
             qlaunch:run_or_raise(ik)
         end, {
-            description = "Run or rise application №" .. ik,
-            group = "Run or Rise",
+            description = "Запустить или поднять приложение №" .. ik,
+            group = "Запустить или Поднять",
             keyset = {ik}
         }})
         table.insert(keyseq[3][6][3], {{}, ik, function()
             qlaunch:run_or_raise(ik, true)
         end, {
-            description = "Launch application №" .. ik,
-            group = "Quick Launch",
+            description = "Запустить приложение №" .. ik,
+            group = "Быстрый Запуск",
             keyset = {ik}
         }})
     end
@@ -325,12 +325,12 @@ function hotkeys:init(args)
             client.focus:kill()
         end
     end, {
-        description = "Kill focused client",
-        group = "Kill application",
+        description = "Закрыть выделенного клиента",
+        group = "Закрытие клиентов",
         keyset = {"f"}
     }}, {{}, "a", kill_all, {
-        description = "Kill all clients with current tag",
-        group = "Kill application",
+        description = "Закрыть все клиенты с текущим тегом",
+        group = "Закрытие клиентов",
         keyset = {"a"}
     }}}
 
@@ -338,18 +338,18 @@ function hotkeys:init(args)
     keyseq[3][2][3] = {{{}, "p", function()
         toggle_placement(env)
     end, {
-        description = "Switch master/slave window placement",
-        group = "Clients managment",
+        description = "Переключение master/slave window placement",
+        group = "Управление клиентами",
         keyset = {"p"}
     }}}
 
     keyseq[3][3][3] = {{{}, "f", restore_client, {
-        description = "Restore minimized client",
-        group = "Clients managment",
+        description = "Восстановить свернутый клиент",
+        group = "Управление клиентами",
         keyset = {"f"}
     }}, {{}, "a", restore_all, {
-        description = "Restore all clients with current tag",
-        group = "Clients managment",
+        description = "Восстановить всех клиентов в текущем теге",
+        group = "Управление клиентами",
         keyset = {"a"}
     }}}
 
@@ -358,20 +358,20 @@ function hotkeys:init(args)
             client.focus.minimized = true
         end
     end, {
-        description = "Minimized focused client",
-        group = "Clients managment",
+        description = "Минимизировать выделенного клиента",
+        group = "Управление клиентами",
         keyset = {"f"}
     }}, {{}, "a", minimize_all, {
-        description = "Minimized all clients with current tag",
-        group = "Clients managment",
+        description = "Минимизировать всех клиентов в текущем теге",
+        group = "Управление клиентами",
         keyset = {"a"}
     }}, {{}, "e", minimize_all_except_focused, {
-        description = "Minimized all clients except focused",
-        group = "Clients managment",
+        description = "Минимизировать всех клиентов в текущем теге исключая выделенного",
+        group = "Управление клиентами",
         keyset = {"e"}
     }}}
 
-    -- Layouts
+    -- Макеты
     --------------------------------------------------------------------------------
 
     -- shared layout keys
@@ -379,42 +379,42 @@ function hotkeys:init(args)
         awful.tag.incmwfact(0.05)
     end, {
         description = "Increase master width factor",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod}, "j", function()
         awful.tag.incmwfact(-0.05)
     end, {
         description = "Decrease master width factor",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod}, "i", function()
         awful.client.incwfact(0.05)
     end, {
-        description = "Increase window factor of a client",
-        group = "Layout"
+        description = "Увеличить коэффициент использования окна клиента",
+        group = "Макет"
     }}, {{env.mod}, "k", function()
         awful.client.incwfact(-0.05)
     end, {
-        description = "Decrease window factor of a client",
-        group = "Layout"
+        description = "Уменьшить коэффициент использования окна клиента",
+        group = "Макет"
     }}, {{env.mod}, "+", function()
         awful.tag.incnmaster(1, nil, true)
     end, {
-        description = "Increase the number of master clients",
-        group = "Layout"
+        description = "Увеличить количество основных клиентов",
+        group = "Макет"
     }}, {{env.mod}, "-", function()
         awful.tag.incnmaster(-1, nil, true)
     end, {
-        description = "Decrease the number of master clients",
-        group = "Layout"
+        description = "Уменьшить количество основных клиентов",
+        group = "Макет"
     }}, {{env.mod, "Control"}, "+", function()
         awful.tag.incncol(1, nil, true)
     end, {
-        description = "Increase the number of columns",
-        group = "Layout"
+        description = "Увеличить количество столбцов",
+        group = "Макет"
     }}, {{env.mod, "Control"}, "-", function()
         awful.tag.incncol(-1, nil, true)
     end, {
-        description = "Decrease the number of columns",
-        group = "Layout"
+        description = "Уменьшить количество столбцов",
+        group = "Макет"
     }}}
 
     laycom:set_keys(layout_tile, "tile")
@@ -424,42 +424,42 @@ function hotkeys:init(args)
         grid.move_to("up")
     end, {
         description = "Move window up",
-        group = "Movement"
+        group = "Перемещение"
     }}, {{env.mod}, "KP_Down", function()
         grid.move_to("down")
     end, {
         description = "Move window down",
-        group = "Movement"
+        group = "Перемещение"
     }}, {{env.mod}, "KP_Left", function()
         grid.move_to("left")
     end, {
         description = "Move window left",
-        group = "Movement"
+        group = "Перемещение"
     }}, {{env.mod}, "KP_right", function()
         grid.move_to("right")
     end, {
         description = "Move window right",
-        group = "Movement"
+        group = "Перемещение"
     }}, {{env.mod, "Control"}, "KP_Up", function()
         grid.move_to("up", true)
     end, {
         description = "Move window up by bound",
-        group = "Movement"
+        group = "Перемещение"
     }}, {{env.mod, "Control"}, "KP_Down", function()
         grid.move_to("down", true)
     end, {
         description = "Move window down by bound",
-        group = "Movement"
+        group = "Перемещение"
     }}, {{env.mod, "Control"}, "KP_Left", function()
         grid.move_to("left", true)
     end, {
         description = "Move window left by bound",
-        group = "Movement"
+        group = "Перемещение"
     }}, {{env.mod, "Control"}, "KP_Right", function()
         grid.move_to("right", true)
     end, {
         description = "Move window right by bound",
-        group = "Movement"
+        group = "Перемещение"
     }}}
 
     local layout_grid_resize = {{{env.mod}, "i", function()
@@ -552,77 +552,77 @@ function hotkeys:init(args)
         map.swap_group()
     end, {
         description = "Change placement direction for group",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod}, "v", function()
         map.new_group(true)
     end, {
         description = "Create new vertical group",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod}, "h", function()
         map.new_group(false)
     end, {
         description = "Create new horizontal group",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod, "Control"}, "v", function()
         map.insert_group(true)
     end, {
         description = "Insert new vertical group before active",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod, "Control"}, "h", function()
         map.insert_group(false)
     end, {
         description = "Insert new horizontal group before active",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod}, "d", function()
         map.delete_group()
     end, {
         description = "Destroy group",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod, "Control"}, "d", function()
         map.clean_groups()
     end, {
         description = "Destroy all empty groups",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod}, "f", function()
         map.set_active()
     end, {
         description = "Set active group",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod}, "g", function()
         map.move_to_active()
     end, {
         description = "Move focused client to active group",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod, "Control"}, "f", function()
         map.hilight_active()
     end, {
         description = "Hilight active group",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod}, "a", function()
         map.switch_active(1)
     end, {
         description = "Activate next group",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod}, "q", function()
         map.switch_active(-1)
     end, {
         description = "Activate previous group",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod}, "]", function()
         map.move_group(1)
     end, {
         description = "Move active group to the top",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod}, "[", function()
         map.move_group(-1)
     end, {
         description = "Move active group to the bottom",
-        group = "Layout"
+        group = "Макет"
     }}, {{env.mod}, "r", function()
         map.reset_tree()
     end, {
         description = "Reset layout structure",
-        group = "Layout"
+        group = "Макет"
     }}}
 
     local layout_map_resize = {{{env.mod}, "j", function()
@@ -680,7 +680,7 @@ function hotkeys:init(args)
     }}, {{env.mod, "Control"}, "F1", function()
         apphelper(appkeys)
     end, {
-        description = "[Hold] Show hotkeys helper for application",
+        description = "[Hold] Показать помощник по горячим клавишам for application",
         group = "Main"
     }}, {{env.mod}, "c", function()
         redflat.float.keychain:activate(keyseq, "User")
@@ -731,63 +731,63 @@ function hotkeys:init(args)
     }}, {{env.mod}, "w", function()
         mainmenu:show()
     end, {
-        description = "Show main menu",
-        group = "Widgets"
+        description = "Главное меню",
+        group = "Виджеты"
     }}, {{env.mod}, "r", function()
         apprunner:show()
     end, {
-        description = "Application launcher",
-        group = "Widgets"
+        description = "Запуск приложений",
+        group = "Виджеты"
     }}, {{env.mod}, "p", function()
         redflat.float.prompt:run()
     end, {
-        description = "Show the prompt box",
-        group = "Widgets"
+        description = "Выполнить",
+        group = "Виджеты"
     }}, {{env.mod}, "x", function()
         redflat.float.top:show("cpu")
     end, {
-        description = "Show the top process list",
-        group = "Widgets"
+        description = "Список процессов",
+        group = "Виджеты"
     }}, {{env.mod, "Control"}, "m", function()
         redflat.widget.mail:update(true)
     end, {
-        description = "Check new mail",
-        group = "Widgets"
+        description = "Проверить новую почту",
+        group = "Виджеты"
     }}, {{env.mod, "Control"}, "i", function()
         redflat.widget.minitray:toggle()
     end, {
-        description = "Show minitray",
-        group = "Widgets"
+        description = "Показать мини-лоток",
+        group = "Виджеты"
     }}, {{env.mod, "Control"}, "u", function()
         redflat.widget.updates:update(true)
     end, {
-        description = "Check available updates",
-        group = "Widgets"
+        description = "Проверить наличие обновлений",
+        group = "Виджеты"
     }}, {{env.mod}, "g", function()
         qlaunch:show()
     end, {
-        description = "Application quick launcher",
-        group = "Widgets"
+        description = "Быстрый запуск приложений",
+        group = "Виджеты"
     }}, {{env.mod}, "z", function()
         redflat.service.logout:show()
     end, {
-        description = "Log out screen",
-        group = "Widgets"
+        description = "Экран выхода",
+        group = "Виджеты"
     }}, {{env.mod}, "y", function()
         laybox:toggle_menu(mouse.screen.selected_tag)
     end, {
-        description = "Show layout menu",
-        group = "Layouts"
+        description = "Показать меню макета",
+        group = "Макеты"
     }}, {{env.mod}, "Up", function()
         awful.layout.inc(1)
     end, {
         description = "Select next layout",
-        group = "Layouts"
+        group = "Макеты"
     }}, {{env.mod}, "Down", function()
         awful.layout.inc(-1)
     end, {
         description = "Select previous layout",
-        group = "Layouts"
+        group = "Макеты"
     }}, {{}, "XF86MonBrightnessUp", function()
         brightness({
             step = 2
