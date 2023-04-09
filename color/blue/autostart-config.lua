@@ -17,6 +17,8 @@ function autostart.run()
 	awful.spawn.with_shell("python ~/scripts/env/color-profile-setup.py")
 	awful.spawn.with_shell("setxkbmap -layout 'us,ru' -option 'grp:alt_shift_toggle'")
 
+	awful.spawn.with_shell("/usr/lib/polkit-1/polkitd")
+	
 	-- gnome environment
 	awful.spawn.with_shell("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
 
