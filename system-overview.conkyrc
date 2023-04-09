@@ -1,0 +1,127 @@
+conky.config = {
+-- WINDOW
+	own_window = true,
+	own_window_type = 'override',
+	own_window_transparent = true,
+	own_window_hints = 'undecorated,below,skip_taskbar,skip_pager,sticky',
+	own_window_colour = '#1b2b34',
+	own_window_class = 'Conky',
+	own_window_title = 'Full Conky',
+    
+    alignment = 'top_right',
+	gap_x = 30,
+	gap_y = 60,
+	minimum_width = 200,
+
+-- FONTS
+	use_xft = true,
+	font = 'Noto Sans:size=8',
+	xftalpha = 1,
+	override_utf8_locale = true,
+
+-- COLORS
+	draw_shades = false,
+	default_shade_color = '#000000',
+	draw_outline = false,
+	default_outline_color = '#222222',
+
+	default_color = '#eceff4',
+	color0 = '#ebcb8b',
+    color1 = '#5e81ac',
+    color2 = '#bf616b',
+    color3 = '#c678dd',
+
+-- BORDERS
+	draw_borders = false,
+-- Stippled borders?
+	stippled_borders = 0,
+-- border margins
+	border_inner_margin = 8,
+	border_outer_margin = 8,
+-- border width
+	border_width = 1,
+
+-- MISC
+-- Boolean value, if true, Conky will be forked to background when started.
+	background = false,
+
+-- Adds spaces around certain objects to stop them from moving other things
+-- around, this only helps if you are using a mono font
+-- Options: right, left or none
+	use_spacer = 'none',
+
+-- Subtract (file system) buffers from used memory?
+	no_buffers = true,
+
+-- Imlib2 image cache size, in bytes. Default 4MiB Increase this value if you use
+-- $image lots. Set to 0 to disable the image cache.
+	imlib_cache_size = 0,
+
+-- Use the Xdbe extension? (eliminates flicker)
+-- It is highly recommended to use own window with this one
+-- so double buffer won't be so big.
+	double_buffer = true,
+	update_interval = 1,
+};
+
+conky.text = [[
+$color1${font :size=25}${time %H:%M}${font}${offset 10}${color0}${font :size=20}${time %d} ${voffset -10}${font :size=17}${time %B}${time %Y}${font}${voffset 20}${offset -70}$color1${font :size=10}${time %A}${font}
+#
+# CPU Info
+#
+${color0}CPU ${color}${freq_g}GHz${alignr 165}${execi 2 sensors | grep 'Core 0' | cut -c 16-18}°C $cpu%
+$color2${cpugraph 25,150 -l -t}$font
+$color0${top name 1}${alignr 165}$color${top cpu 1}%
+$color0${top name 2}${alignr 165}$color${top cpu 2}%
+$color0${top name 3}${alignr 165}$color${top cpu 3}%
+#
+# MEM Info
+#
+${voffset -105}${goto 175}${color0}RAM ${color}$legacymem/$memmax${alignr}${execi 2 sensors | grep temp2 | cut -c 15-17}°C
+${goto 175}$color2${memgraph 25,150 -l -t}$font
+${goto 175}$color0${top_mem name 1}$alignr$color${top_mem mem_res 1}
+${goto 175}$color0${top_mem name 2}$alignr$color${top_mem mem_res 2}
+${goto 175}$color0${top_mem name 3}$alignr$color${top_mem mem_res 3}
+${color2}${hr}
+#
+# IO Info
+#
+${color0}IO Чтение ${color}${alignr 165}${diskio_read}
+$color2${diskiograph_read sda 25,150 -l -t}
+$color0${top_io name 1}${alignr 175}$color${top_io io_read 1}
+$color0${top_io name 2}${alignr 175}$color${top_io io_read 2}
+$color0${top_io name 3}${alignr 175}$color${top_io io_read 3}
+${voffset -105}${goto 175}${color0}IO Запись ${color}${alignr}${diskio_write}
+${goto 175}$color2${diskiograph_write sda 25,150 -l -t}
+${goto 175}$color0${top_io name 1}${alignr 0}$color${top_io io_write 1}
+${goto 175}$color0${top_io name 2}${alignr 0}$color${top_io io_write 2}
+${goto 175}$color0${top_io name 3}${alignr 0}$color${top_io io_write 3}
+${color2}${hr}
+#
+# FS Info
+#
+${color0}ROOT $color2${fs_bar 5,140 /}${goto 200}$color${fs_used_perc /}% - ${fs_used /}/${fs_size /}
+${color0}HOME $color2${fs_bar 5,140 /home}${goto 200}$color${fs_used_perc /home}% - ${fs_used /home}/${fs_size /home}
+${color0}SWAP $color2${swapbar 5,140}${goto 200}$color$swapperc% - $swap/$swapmax
+${color2}${hr}
+#
+# NET Info
+#
+${color0}WIFI Прием ${color}${alignr 165}${downspeedf wlo1} KiB/s
+$color2${downspeedgraph wlo1 25,150 -l -t}
+${color0}Внешний IP${color}${alignr 175}${execi 3600 wget -q -O /dev/stdout http://checkip.dyndns.org/ | cut -d : -f 2- | cut -d \< -f -1}
+${voffset -73}${goto 175}${color0}WIFI Отдача ${color}${alignr}${upspeedf wlo1} KiB/s
+${goto 175}$color2${upspeedgraph wlo1 25,150 -l -t}
+${goto 175}${color0}Внутренний IP${color}${alignr 0}${addr wlo1}
+${color}${hr}
+#
+# SYS Info
+#
+${color0}Система: ${color}Linux ${execi 10000 awk -F'=' '/DISTRIB_RELEASE=/ {printf $2" "} /CODENAME/ {print $2}' /etc/lsb-release} ${machine} ${kernel}
+${color0}Пользователь: ${color}${execi 1200 whoami}@${nodename}
+${color0}Время работы: ${color}${uptime_short}
+${color0}Файловая система: ${color}${fs_type}
+${color0}Установленно пакетов: ${color}${execi 10000 pacman -Q | wc -l}
+${color0}Доступные обновления: ${color}${execpi 10800 checkupdates | wc -l}${font}${color}
+${color0}Последнее обновление: ${color}${execi 10000 grep "starting full system upgrade" /var/log/pacman.log | tail -n1| cut --bytes=2-17}
+]];

@@ -53,29 +53,29 @@ bartip.keys = {}
 bartip.keys.bar = {
 	{
 		{ "Mod4" }, "b", function() redtitle.toggle(client.focus); bartip:update() end,
-		{ description = "Show/hide titlebar for focused client", group = "Titlebar control" }
+		{ description = "Показать/скрыть заголовок для сфокусированного клиента", group = "Управление заголовком" }
 	},
 	{
 		{ "Mod4" }, "a", function() redtitle.toggle_all(); bartip:update() end,
-		{ description = "Show/hide titlebar for all clients", group = "Titlebar control" }
+		{ description = "Показать/скрыть заголовок для всех клиентов", group = "Управление заголовком" }
 	},
 	--{
 	--	{ "Mod4" }, "v", function() redtitle.switch(client.focus); bartip:update() end,
-	--	{ description = "Switch titlebar view for focused client", group = "Titlebar control" }
+	--	{ description = "Переключить вид заголовка для сфокусированного клиента", group = "Управление заголовком" }
 	--},
 	{
 		{ "Mod4" }, "n", function() redtitle.global_switch(); bartip:update() end,
-		{ description = "Switch titlebar view for all clients", group = "Titlebar control" }
+		{ description = "Переключить вид заголовка для всех клиентов", group = "Управление заголовком" }
 	},
 }
 bartip.keys.action = {
 	{
 		{ "Mod4" }, "Super_L", function() bartip:hide() end,
-		{ description = "Close top list widget", group = "Action" }
+		{ description = "Закрыть виджет верхнего списка", group = "Действие" }
 	},
 	{
 		{ "Mod4" }, "F1", function() redtip:show() end,
-		{ description = "Show hotkeys helper", group = "Action" }
+		{ description = "Показать помощник по горячим клавишам", group = "Действие" }
 	},
 }
 

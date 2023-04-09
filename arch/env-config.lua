@@ -19,7 +19,6 @@ local env = {}
 -- Build hotkeys depended on config parameters
 -----------------------------------------------------------------------------------------------------------------------
 function env:init(args)
-
 	-- init vars
 	args = args or {}
 	local theme = args.theme or "arch"
@@ -84,7 +83,7 @@ end
 --------------------------------------------------------------------------------
 env.wrapper = function(widget, name, buttons)
 	local margin = redflat.util.table.check(beautiful, "widget.wrapper")
-	               and beautiful.widget.wrapper[name] or { 0, 0, 0, 0 }
+		and beautiful.widget.wrapper[name] or { 0, 0, 0, 0 }
 	if buttons then
 		widget:buttons(buttons)
 	end

@@ -136,9 +136,9 @@ function player:init(args)
 	local style = default_style()
 	local show_album = false
 
-	self.info = { artist = "Unknown", album = "Unknown" }
+	self.info = { artist = "Неизвестный", album = "Неизвестный" }
 	self.style = style
-	self.last = { status = "Stopped", length = 5 * 60 * 1000000, volume = nil, trackid = "/not/used" }
+	self.last = { status = "Остановлен", length = 5 * 60 * 1000000, volume = nil, trackid = "/not/used" }
 	self.player = _player
 	self.use_track_id_hack = args.use_track_id_hack or false
 
@@ -165,8 +165,8 @@ function player:init(args)
 
 	-- Text lines
 	------------------------------------------------------------
-	self.box.title = wibox.widget.textbox("Title")
-	self.box.artist = wibox.widget.textbox("Artist")
+	self.box.title = wibox.widget.textbox("Заголовок")
+	self.box.artist = wibox.widget.textbox("Исполнитель")
 	self.box.title:set_font(style.titlefont)
 	self.box.title:set_valign("top")
 	self.box.artist:set_font(style.artistfont)

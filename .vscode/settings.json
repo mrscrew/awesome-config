@@ -1,0 +1,17 @@
+{
+    "luahelper.format.keep_simple_function_one_line": true,
+    "luahelper.format.keep_simple_control_block_one_line": true,
+    "luahelper.format.align_table_field": false,
+    "luahelper.format.align_parameter": false,
+    "luahelper.format.align_args": false,
+    "Lua.runtime.version": "LuaJIT",
+    "Lua.diagnostics.globals": [
+        "screen",
+        "mouse",
+        "client",
+        "lock"
+    ],
+    "Lua.workspace.library": [
+        "/usr/share/awesome/lib"
+    ]
+}

@@ -37,31 +37,31 @@ qlaunch.forcemod = { "Control" }
 qlaunch.keys.action = {
 	{
 		{}, "Escape", function() qlaunch:hide(true) end,
-		{ description = "Close widget", group = "Action" }
+		{ description = "Закрыть виджет", group = "Действие" }
 	},
 	{
 		{}, "Return", function() qlaunch:run_and_hide() end,
-		{ description = "Run or rise selected app", group = "Action" }
+		{ description = "Запустить или поднять выбранное приложение", group = "Действие" }
 	},
 	{
 		{}, "s", function() qlaunch:set_new_app(qlaunch.switcher.selected, client.focus) end,
-		{ description = "Bind focused app to selected key", group = "Action" }
+		{ description = "Привязать сфокусированное приложение к выбранной клавише", group = "Действие" }
 	},
 	{
 		{}, "d", function() qlaunch:set_new_app(qlaunch.switcher.selected) end,
-		{ description = "Clear selected key", group = "Action" }
+		{ description = "Очистить выбранный ключ", group = "Действие" }
 	},
 	{
 		{}, "r", function() qlaunch:load_config(true) end,
-		{ description = "Reload config from disk", group = "Action" }
+		{ description = "Перезагрузить конфигурацию с диска", group = "Действие" }
 	},
 	{
 		{}, "w", function() qlaunch:save_config() end,
-		{ description = "Save config to disk", group = "Action" }
+		{ description = "Сохранить конфигурацию на диск", group = "Действие" }
 	},
 	{
 		{ "Mod4" }, "F1", function() redtip:show() end,
-		{ description = "Show hotkeys helper", group = "Action" }
+		{ description = "Показать помощник по горячим клавишам", group = "Действие" }
 	},
 }
 
@@ -70,12 +70,12 @@ qlaunch.keys.all = awful.util.table.join({}, qlaunch.keys.action)
 qlaunch._fake_keys = {
 	{
 		{}, "N", nil,
-		{ description = "Select app (run or rise if selected already) by key", group = "Action",
+		{ description = "Выберите приложение (запустить или поднять, если оно уже выбрано) с помощью клавиши", group = "Действие",
 		  keyset = { "1", "2", "3", "4", "5", "6", "7", "8", "9" } }
 	},
 	{
 		{}, "N", nil,
-		{ description = "Select app (launch if selected already) by key", group = "Action" }
+		{ description = "Выберите приложение (запустить или поднять, если оно уже выбрано) с помощью клавиши", group = "Действие" }
 	},
 }
 

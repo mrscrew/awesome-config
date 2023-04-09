@@ -29,8 +29,8 @@ end
 ------------------------------------------------------------
 function desktop.wgeometry(grid, place, workarea)
 	return {
-		x = wposition(grid, place[1], workarea, "width"),
-		y = wposition(grid, place[2], workarea, "height"),
+		x      = wposition(grid, place[1], workarea, "width"),
+		y      = wposition(grid, place[2], workarea, "height"),
 		width  = grid.width[place[1]],
 		height = grid.height[place[2]]
 	}
@@ -42,8 +42,8 @@ function desktop.edge(direction, zone)
 	local edge = { area = {} }
 
 	edge.wibox = wibox({
-		bg      = "#00000000",  -- transparent without compositing manager
-		opacity = 0,            -- transparent with compositing manager
+		bg      = "#00000000", -- transparent without compositing manager
+		opacity = 0,     -- transparent with compositing manager
 		ontop   = true,
 		visible = true
 	})
@@ -123,4 +123,3 @@ end
 -- End
 -----------------------------------------------------------------------------------------------------------------------
 return desktop
-

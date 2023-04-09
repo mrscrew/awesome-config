@@ -27,26 +27,26 @@ local top = { keys = {} }
 top.keys.management = {
 	{
 		{}, "c", function() top:set_sort("cpu") end,
-		{ description = "Sort by CPU usage", group = "Management" }
+		{ description = "Сортировать по загрузке ЦП", group = "Управление" }
 	},
 	{
 		{}, "m", function() top:set_sort("mem") end,
-		{ description = "Sort by RAM usage", group = "Management" }
+		{ description = "Sort by RAM usage", group = "Управление" }
 	},
 }
 
 top.keys.action = {
 	{
 		{}, "k", function() top.kill_selected() end,
-		{ description = "Kill process", group = "Action" }
+		{ description = "Убить процесс", group = "Действие" }
 	},
 	{
 		{}, "Escape", function() top:hide() end,
-		{ description = "Close top list widget", group = "Action" }
+		{ description = "Закрыть виджет верхнего списка", group = "Действие" }
 	},
 	{
 		{ "Mod4" }, "F1", function() redtip:show() end,
-		{ description = "Show hotkeys helper", group = "Action" }
+		{ description = "Показать помощник по горячим клавишам", group = "Действие" }
 	},
 }
 
@@ -55,7 +55,7 @@ top.keys.all = awful.util.table.join(top.keys.management, top.keys.action)
 top._fake_keys = {
 	{
 		{}, "N", nil,
-		{ description = "Select process by key", group = "Management",
+		{ description = "Выбрать процесс по ключу", group = "Управление",
 		  keyset = { "1", "2", "3", "4", "5", "6", "7", "8", "9" } }
 	},
 }
@@ -216,10 +216,10 @@ function top:init()
 	function self:set_sort(args)
 		if args == "cpu" then
 			sort_function = sort_by_cpu
-			title:set({ cpu = "▾ CPU", mem = "Memory"})
+			title:set({ cpu = "▾ ЦП", mem = "ОЗУ"})
 		elseif args == "mem" then
 			sort_function = sort_by_mem
-			title:set({ cpu = "CPU", mem = "▾ Memory"})
+			title:set({ cpu = "ЦП", mem = "▾ ОЗУ"})
 		end
 	end
 
@@ -244,7 +244,7 @@ function top:init()
 	--------------------------------------------------------------------------------
 	title = construct_item(style)
 	title:set_bg("transparent")
-	title:set({ number = "#", name = "Process Name", cpu = "▾ CPU", mem = "Memory"})
+	title:set({ number = "#", name = "Имя процесса", cpu = "▾ ЦП", mem = "ОЗУ"})
 
 	for _, txtbox in pairs(title.label) do
 		txtbox:set_font(style.title_font)

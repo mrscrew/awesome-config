@@ -42,6 +42,7 @@ mymenu:init({
     env = env
 })
 
+
 -- Panel widgets
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -54,13 +55,13 @@ local separator = redflat.gauge.separator.vertical()
 local taglist = {}
 
 taglist.style = {
-    widget = redflat.gauge.tag.ruby.new,
+    widget = redflat.gauge.tag.blue.new,
     show_tip = true
 }
 
 -- double line taglist
 taglist.cols_num = 6
-taglist.rows_num = 2
+taglist.rows_num = 1
 
 taglist.layout = wibox.widget {
     expand = true,
@@ -70,36 +71,30 @@ taglist.layout = wibox.widget {
 }
 
 -- buttons
-taglist.buttons = awful.util.table.join(awful.button({}, 1, function(t)
-    t:view_only()
-end), awful.button({env.mod}, 1, function(t)
-    if client.focus then
-        client.focus:move_to_tag(t)
-    end
-end), awful.button({}, 2, awful.tag.viewtoggle), awful.button({}, 3, function(t)
-    redflat.widget.layoutbox:toggle_menu(t)
-end), awful.button({env.mod}, 3, function(t)
-    if client.focus then
-        client.focus:toggle_tag(t)
-    end
-end), awful.button({}, 4, function(t)
-    awful.tag.viewnext(t.screen)
-end), awful.button({}, 5, function(t)
-    awful.tag.viewprev(t.screen)
-end))
+taglist.buttons = awful.util.table.join(
+    awful.button({}, 1, function(t) t:view_only() end),
+    awful.button({ env.mod }, 1, function(t) if client.focus then client.focus:move_to_tag(t) end end),
+    awful.button({}, 2, awful.tag.viewtoggle),
+    awful.button({}, 3, function(t) redflat.widget.layoutbox:toggle_menu(t) end),
+    awful.button({ env.mod }, 3, function(t) if client.focus then client.focus:toggle_tag(t) end end),
+    awful.button({}, 4, function(t) awful.tag.viewnext(t.screen) end),
+    awful.button({}, 5, function(t) awful.tag.viewprev(t.screen) end))
 
 -- some tag settings which indirectky depends on row and columns number of taglist
-taglist.names = {"Prime", "Full", "Code", "Edit", "Misc", "Game", "Spare", "Back", "Test", "Qemu", "Data", "Free"}
+taglist.names = { "Prime", "Full", "Code", "Edit", "Misc", "Game" }
 
 local al = awful.layout.layouts
-taglist.layouts = {al[5], al[6], al[6], al[4], al[3], al[3], al[5], al[6], al[6], al[4], al[3], al[1]}
+taglist.layouts = { al[5], al[6], al[6], al[4], al[3], al[3], al[5], al[6], al[6], al[4], al[3], al[1] }
+
 
 -- Tasklist
 --------------------------------------------------------------------------------
 local tasklist = {}
 
-tasklist.buttons = awful.util.table.join(awful.button({}, 1, redflat.widget.tasklist.action.select),
-    awful.button({}, 2, redflat.widget.tasklist.action.close), awful.button({}, 3, redflat.widget.tasklist.action.menu),
+tasklist.buttons = awful.util.table.join(
+    awful.button({}, 1, redflat.widget.tasklist.action.select),
+    awful.button({}, 2, redflat.widget.tasklist.action.close),
+    awful.button({}, 3, redflat.widget.tasklist.action.menu),
     awful.button({}, 4, redflat.widget.tasklist.action.switch_next),
     awful.button({}, 5, redflat.widget.tasklist.action.switch_prev))
 
@@ -168,7 +163,7 @@ end))
 -- Keyboard layout indicator
 --------------------------------------------------------------------------------
 local kbindicator = {}
-redflat.widget.keyboard:init({"English", "Russian"})
+redflat.widget.keyboard:init({ "Английский", "Русский" })
 kbindicator.widget = redflat.widget.keyboard()
 
 kbindicator.buttons = awful.util.table.join(awful.button({}, 1, function()
@@ -187,9 +182,9 @@ local updates = {}
 updates.widget = redflat.widget.updates()
 
 updates.buttons = awful.util.table.join(
-	awful.button({ }, 1, function () redflat.widget.updates:toggle() end),
-	awful.button({ }, 2, function () redflat.widget.updates:update(true) end),
-	awful.button({ }, 3, function () redflat.widget.updates:toggle() end)
+    awful.button({}, 1, function() redflat.widget.updates:toggle() end),
+    awful.button({}, 2, function() redflat.widget.updates:update(true) end),
+    awful.button({}, 3, function() redflat.widget.updates:toggle() end)
 )
 
 -- System resource monitoring widgets
@@ -274,7 +269,7 @@ local cpuram_func = function()
 
     return {
         text = "CPU: " .. cpu_usage .. "%  " .. "RAM: " .. mem_usage .. "%",
-        value = {cpu_usage / 100, mem_usage / 100},
+        value = { cpu_usage / 100, mem_usage / 100 },
         alert = cpu_usage > 80 or mem_usage > 70
     }
 end
@@ -324,17 +319,17 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- panel wibox
     s.panel = awful.wibar({
-        position = "bottom",
+        position = "top",
         screen = s,
         height = beautiful.panel_height or 36
     })
 
     -- add widgets to the wibox
-    s.panel:setup{
+    s.panel:setup {
         layout = wibox.layout.align.horizontal,
-        { -- left widgets
+        {
+          -- left widgets
             layout = wibox.layout.fixed.horizontal,
-
             env.wrapper(mymenu.widget, "mainmenu", mymenu.buttons),
             separator,
             env.wrapper(layoutbox[s], "layoutbox", layoutbox.buttons),
@@ -343,16 +338,16 @@ awful.screen.connect_for_each_screen(function(s)
             separator,
             s.mypromptbox
         },
-        { -- middle widget
+        {
+          -- middle widget
             layout = wibox.layout.align.horizontal,
             expand = "outside",
-
             nil,
             env.wrapper(tasklist[s], "tasklist")
         },
-        { -- right widgets
+        {
+          -- right widgets
             layout = wibox.layout.fixed.horizontal,
-
             separator,
             env.wrapper(kbindicator.widget, "keyboard", kbindicator.buttons),
             separator,
@@ -377,19 +372,19 @@ end)
 
 -- Desktop widgets
 -----------------------------------------------------------------------------------------------------------------------
-if not lock.desktop then
-	local desktop = require("arch.desktop-config") -- load file with desktop widgets configuration
-	desktop:init({
-		env = env,
-		buttons = awful.util.table.join(awful.button({}, 3, function () mymenu.mainmenu:toggle() end))
-	})
-end
+-- if not lock.desktop then
+--     local desktop = require("arch.desktop-config") -- load file with desktop widgets configuration
+--     desktop:init({
+--         env = env,
+--         buttons = awful.util.table.join(awful.button({}, 3, function() mymenu.mainmenu:toggle() end))
+--     })
+-- end
 
 -- Key bindings
 -----------------------------------------------------------------------------------------------------------------------
-local appkeys = require("color.blue.appkeys-config") -- load file with application keys sheet
+local appkeys = require("arch.appkeys-config") -- load file with application keys sheet
 
-local hotkeys = require("arch.keys-config") -- load file with hotkeys configuration
+local hotkeys = require("arch.keys-config")    -- load file with hotkeys configuration
 hotkeys:init({
     env = env,
     menu = mymenu.mainmenu,

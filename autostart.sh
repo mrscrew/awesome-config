@@ -13,7 +13,7 @@ run dex $HOME/.config/autostart/arcolinux-welcome-app.desktop
 run nm-applet
 #run caffeine
 run pamac-tray
-run variety
+#run variety
 run xfce4-power-manager
 run blueberry-tray
 run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -21,8 +21,8 @@ run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 run setxkbmap -layout "us,ru" -option "grp:alt_shift_toggle"
 run numlockx on
 run volumeicon
-#run nitrogen --restore
-run conky -c $HOME/.config/awesome/system-overview
+run nitrogen --restore
+run conky -c $HOME/.config/awesome/system-overview.conkyrc
 #you can set wallpapers in themes as well
 feh --bg-fill /usr/share/backgrounds/archlinux/arch-wallpaper.jpg &
 #run applications from startup

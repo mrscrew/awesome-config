@@ -33,7 +33,7 @@ local function default_style()
 		geometry      = { width = 800 },
 		border_margin = { 10, 10, 10, 10 },
 		tspace        = 5,
-		delim         = "   ",
+		delim         = "	",
 		border_width  = 2,
 		ltimeout      = 0.05,
 		font          = "Sans 12",
@@ -217,14 +217,14 @@ function hotkeys:init()
 	--------------------------------------------------------------------------------
 	self.layout = wibox.layout.flex.horizontal()
 
-	self.title = wibox.widget.textbox("Title")
+	self.title = wibox.widget.textbox("Заголовок")
 	self.title:set_align("center")
 	self.title:set_font(style.titlefont)
 
 	local _, th = self.title:get_preferred_size()
 	self.vertical_pag = self.vertical_pag + th
 
-	local subtitle = wibox.widget.textbox("Press any key to highlight tip, Escape for exit")
+	local subtitle = wibox.widget.textbox("Нажмите любую клавишу, чтобы выделить подсказку, Escape для выхода")
 	subtitle:set_align("center")
 
 	local _, sh = subtitle:get_preferred_size()
@@ -290,7 +290,7 @@ function hotkeys:set_pack(name, pack, columns, geometry, on_close)
 		self.keypack,
 		{ name = name, pack = self.cache[name], geometry = geometry or self.style.geometry, on_close = on_close }
 	)
-	self.title:set_text(name .. " hotkeys")
+	self.title:set_text(name .. " горячие клавиши")
 	self:highlight()
 	self:update_geometry(self.keypack[#self.keypack].geometry)
 end
@@ -299,7 +299,7 @@ end
 --------------------------------------------------------------------------------
 function hotkeys:remove_pack()
 	table.remove(self.keypack)
-	self.title:set_text(self.keypack[#self.keypack].name .. " hotkeys")
+	self.title:set_text(self.keypack[#self.keypack].name .. " горячие клавиши")
 	self:highlight()
 	self:update_geometry(self.keypack[#self.keypack].geometry)
 end

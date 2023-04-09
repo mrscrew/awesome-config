@@ -44,29 +44,29 @@ end
 -- Disk usage
 -----------------------------------------------------------------------------------------------------------------------
 function system.fs_info(args)
-	local fs_info = {}
-	args = args or "/"
+	local fs_info                              = {}
+	args                                       = args or "/"
 
 	-- Get data from df
 	------------------------------------------------------------
-	local line = redutil.read.output("LC_ALL=C df -kP " .. args .. " | tail -1")
+	local line                                 = redutil.read.output("LC_ALL=C df -kP " .. args .. " | tail -1")
 
 	-- Parse data
 	------------------------------------------------------------
-	fs_info.size  = string.match(line, "^.-[%s]([%d]+)")
-	fs_info.mount = string.match(line, "%%[%s]([%p%w]+)")
+	fs_info.size                               = string.match(line, "^.-[%s]([%d]+)")
+	fs_info.mount                              = string.match(line, "%%[%s]([%p%w]+)")
 	fs_info.used, fs_info.avail, fs_info.use_p = string.match(line, "([%d]+)[%D]+([%d]+)[%D]+([%d]+)%%")
 
 	-- Format output special for redflat desktop widget
 	------------------------------------------------------------
-   return { tonumber(fs_info.use_p) or 0, tonumber(fs_info.used) or 0}
+	return { tonumber(fs_info.use_p) or 0, tonumber(fs_info.used) or 0 }
 end
 
 -- Qemu image check
 -----------------------------------------------------------------------------------------------------------------------
 local function q_format(size, k)
 	if not size or not k then return 0 end
-	return k == "K" and tonumber(size) or k == "M" and size * 1024 or k == "G" and size * 1024^2 or 0
+	return k == "K" and tonumber(size) or k == "M" and size * 1024 or k == "G" and size * 1024 ^ 2 or 0
 end
 
 function system.qemu_image_size(args)
@@ -86,7 +86,7 @@ function system.qemu_image_size(args)
 
 	-- Format output special for redflat desktop widget
 	------------------------------------------------------------
-   return { img_info.use_p, img_info.size, off = img_info.size == 0 }
+	return { img_info.use_p, img_info.size, off = img_info.size == 0 }
 end
 
 -- Traffic check with vnstat (async)
@@ -97,10 +97,10 @@ local vnstat_index = { rx = 1, tx = 3, total = 5 }
 local function vnstat_format(value, unit)
 	if not value or not unit then return 0 end
 	local v = value:gsub(',', '.')
-	return    unit == "B"   and tonumber(v)
-	       or unit == "KiB" and v * 1024
-	       or unit == "MiB" and v * 1024^2
-	       or unit == "GiB" and v * 1024^3
+	return unit == "B" and tonumber(v)
+		or unit == "KiB" and v * 1024
+		or unit == "MiB" and v * 1024 ^ 2
+		or unit == "GiB" and v * 1024 ^ 3
 end
 
 local function vnstat_parse(output, traffic)
@@ -133,7 +133,6 @@ function system.net_speed(interface, storage)
 	-- Get network info
 	--------------------------------------------------------------------------------
 	for line in io.lines("/proc/net/dev") do
-
 		-- Match wmaster0 as well as rt0 (multiple leading spaces)
 		local name = string.match(line, "^[%s]?[%s]?[%s]?[%s]?([%w]+):")
 
@@ -178,7 +177,6 @@ function system.disk_speed(disk, storage)
 	-- Get i/o info
 	--------------------------------------------------------------------------------
 	for line in io.lines("/proc/diskstats") do
-
 		-- parse info
 		-- linux kernel documentation: Documentation/iostats.txt
 		local device, read, write = string.match(line, "([^%s]+) %d+ %d+ (%d+) %d+ %d+ %d+ (%d+)")
@@ -226,22 +224,28 @@ function system.memory_info()
 	------------------------------------------------------------
 	for line in io.lines("/proc/meminfo") do
 		for k, v in string.gmatch(line, "([%a]+):[%s]+([%d]+).+") do
-			if     k == "MemTotal"  then mem.total = math.floor(v/1024)
-			elseif k == "MemFree"   then mem.buf.f = math.floor(v/1024)
-			elseif k == "Buffers"   then mem.buf.b = math.floor(v/1024)
-			elseif k == "Cached"    then mem.buf.c = math.floor(v/1024)
-			elseif k == "SwapTotal" then mem.swp.t = math.floor(v/1024)
-			elseif k == "SwapFree"  then mem.swp.f = math.floor(v/1024)
+			if k == "MemTotal" then
+				mem.total = math.floor(v / 1024)
+			elseif k == "MemFree" then
+				mem.buf.f = math.floor(v / 1024)
+			elseif k == "Buffers" then
+				mem.buf.b = math.floor(v / 1024)
+			elseif k == "Cached" then
+				mem.buf.c = math.floor(v / 1024)
+			elseif k == "SwapTotal" then
+				mem.swp.t = math.floor(v / 1024)
+			elseif k == "SwapFree" then
+				mem.swp.f = math.floor(v / 1024)
 			end
 		end
 	end
 
 	-- Calculate memory percentage
 	------------------------------------------------------------
-	mem.free  = mem.buf.f + mem.buf.b + mem.buf.c
-	mem.inuse = mem.total - mem.free
-	mem.bcuse = mem.total - mem.buf.f
-	mem.usep  = math.floor(mem.inuse / mem.total * 100)
+	mem.free      = mem.buf.f + mem.buf.b + mem.buf.c
+	mem.inuse     = mem.total - mem.free
+	mem.bcuse     = mem.total - mem.buf.f
+	mem.usep      = math.floor(mem.inuse / mem.total * 100)
 
 	-- calculate swap percentage
 	mem.swp.inuse = mem.swp.t - mem.swp.f
@@ -277,21 +281,20 @@ function system.cpu_usage(storage)
 	-- Calculate usage
 	------------------------------------------------------------
 	for i, line in ipairs(cpu_lines) do
-
 		-- calculate totals
 		local total_new = 0
 		for _, value in ipairs(line) do total_new = total_new + value end
 
-		local active_new = total_new - (line[4] + line[5])
+		local active_new  = total_new - (line[4] + line[5])
 
 		-- calculate percentage
-		local diff_total  = total_new  - (storage.cpu_total[i]  or 0)
+		local diff_total  = total_new - (storage.cpu_total[i] or 0)
 		local diff_active = active_new - (storage.cpu_active[i] or 0)
 
 		if i == 1 then diff_time_total = diff_total end
 		if diff_total == 0 then diff_total = 1E-6 end
 
-		cpu_usage[i] = math.floor((diff_active / diff_total) * 100)
+		cpu_usage[i]          = math.floor((diff_active / diff_total) * 100)
 
 		-- store totals
 		storage.cpu_total[i]  = total_new
@@ -349,9 +352,12 @@ function system.battery(batname)
 	local remaining, capacity
 
 	-- Get capacity information
-	if     battery.charge_now then remaining, capacity = battery.charge_now, battery.charge_full
-	elseif battery.energy_now then remaining, capacity = battery.energy_now, battery.energy_full
-	else                           return {battery_state["Unknown\n"], 0, "N/A"}
+	if battery.charge_now then
+		remaining, capacity = battery.charge_now, battery.charge_full
+	elseif battery.energy_now then
+		remaining, capacity = battery.energy_now, battery.energy_full
+	else
+		return { battery_state["Unknown\n"], 0, "N/A" }
 	end
 
 	-- Calculate percentage (but work around broken BAT/ACPI implementations)
@@ -362,9 +368,12 @@ function system.battery(batname)
 	------------------------------------------------------------
 	local rate
 
-	if     battery.current_now then rate = tonumber(battery.current_now)
-	elseif battery.power_now   then rate = tonumber(battery.power_now)
-	else                            return {state, percent, "N/A"}
+	if battery.current_now then
+		rate = tonumber(battery.current_now)
+	elseif battery.power_now then
+		rate = tonumber(battery.power_now)
+	else
+		return { state, percent, "N/A" }
 	end
 
 	-- Calculate remaining (charging or discharging) time
@@ -372,16 +381,19 @@ function system.battery(batname)
 	if rate ~= nil and rate ~= 0 then
 		local timeleft
 
-		if     state == "+" then timeleft = (tonumber(capacity) - tonumber(remaining)) / tonumber(rate)
-		elseif state == "-" then timeleft = tonumber(remaining) / tonumber(rate)
-		else                     return {state, percent, time}
+		if state == "+" then
+			timeleft = (tonumber(capacity) - tonumber(remaining)) / tonumber(rate)
+		elseif state == "-" then
+			timeleft = tonumber(remaining) / tonumber(rate)
+		else
+			return { state, percent, time }
 		end
 
 		-- calculate time
 		local hoursleft   = math.floor(timeleft)
-		local minutesleft = math.floor((timeleft - hoursleft) * 60 )
+		local minutesleft = math.floor((timeleft - hoursleft) * 60)
 
-		time = string.format("%02d:%02d", hoursleft, minutesleft)
+		time              = string.format("%02d:%02d", hoursleft, minutesleft)
 	end
 
 	--------------------------------------------------------------------------------
@@ -537,13 +549,12 @@ end
 --------------------------------------------------------------------------------
 function system.transmission.sort_torrent(a, b)
 	return a.status == "Downloading" and b.status ~= "Downloading"
-	       or a.status == "Stopped" and b.status ~= "Stopped" and b.status ~= "Downloading"
+		or a.status == "Stopped" and b.status ~= "Stopped" and b.status ~= "Downloading"
 end
 
 -- Function to parse 'transmission-remote -l' output
 --------------------------------------------------------------------------------
 function system.transmission.parse(output, show_active_only)
-
 	-- Initialize vars
 	------------------------------------------------------------
 	local torrent = {
@@ -562,7 +573,6 @@ function system.transmission.parse(output, show_active_only)
 
 	-- parse every line
 	for line in string.gmatch(output, "[^\r\n]+") do
-
 		if string.sub(line, 1, 3) == "Sum" then
 			-- get total speed
 			local seed, dnld = string.match(line, "Sum:%s+[%d%.]+%s+%a+%s+([%d%.]+)%s+([%d%.]+)")
@@ -660,7 +670,6 @@ function system.proc_info(cpu_storage)
 
 		-- if process with given pid exist in /proc
 		if stat then
-
 			-- get process name
 			local name = string.match(stat, ".+%((.+)%).+")
 			local proc_stat = { name }
@@ -710,6 +719,17 @@ function system.dformatted.cpumem(storage)
 		bars = cores,
 		lines = { { mem.usep, mem.inuse }, { mem.swp.usep, mem.swp.inuse } }
 	}
+end
+
+-- CPU usage formatted special for desktop widget
+--------------------------------------------------------------------------------
+function system.dformatted.cpu(args)
+	args = args or {}
+	local storage = { cpu_total = {}, cpu_active = {} }
+	return function()
+		local usage = system.cpu_usage(storage).total
+		return { usage or 0 }
+	end
 end
 
 -- CPU usage formatted special for panel widget

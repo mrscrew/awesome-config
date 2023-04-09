@@ -126,16 +126,16 @@ function desktop:init(args)
 
 	local cpu_sentences = {
 		"%s",
-		" %s percent of CPU. ",
-		"In more detail %s of the %s available cores fully loaded ",
-		"and %s %s half-used. ",
+		" %s процентов ЦП. ",
+		"Более подробно %s из %s доступных ядер полностью загружены ",
+		"и %s %s используется наполовину. ",
 		-- "Furthermore %s %s used by more than ten percent.",
 	}
 
 	local cpu_intro = {}
-	cpu_intro[11] = "Your system uses only"
-	cpu_intro[50] = "Your system uses"
-	cpu_intro[100] = "Warning! Your system uses only"
+	cpu_intro[11] = "Ваша система использует всего"
+	cpu_intro[50] = "Ваша система использует"
+	cpu_intro[100] = "Внимание! Ваша система использует"
 
 	-- cpu meter function
 	cpuset.blocks[1].timeout = 5
@@ -153,7 +153,7 @@ function desktop:init(args)
 			{ form_value(usage.total, {}, cpu_intro) },
 			{ form_value(usage.total, colset.light, {}) },
 			{ form_value(core_load.full, colset.cores), #usage.core },
-			{ form_value(core_load.half, colset.cores, { "not even one" }), core_load.half > 1 and "are" or "is" },
+			{ form_value(core_load.half, colset.cores, { "не одно" }), core_load.half > 1 and "are" or "не" },
 			-- { form_value(core_load.low), core_load.low > 1 and "cores are" or "core is" },
 		}
 

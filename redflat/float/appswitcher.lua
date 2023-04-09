@@ -44,22 +44,22 @@ local _empty_surface = redutil.base.placeholder({ txt = " " })
 appswitcher.keys.move = {
 	{
 		{}, "Right", function() appswitcher:switch() end,
-		{ description = "Select next app", group = "Navigation" }
+		{ description = "Выбрать следующее приложение", group = "Навигация" }
 	},
 	{
 		{}, "Left", function() appswitcher:switch({ reverse = true }) end,
-		{ description = "Select previous app", group = "Navigation" }
+		{ description = "Выбрать предыдущее приложение", group = "Навигация" }
 	},
 }
 
 appswitcher.keys.action = {
 	{
 		{}, "Return", function() appswitcher:hide() end,
-		{ description = "Activate and exit", group = "Action" }
+		{ description = "Активировать и выйти", group = "Действие" }
 	},
 	{
 		{ "Mod4" }, "F1", function() redtip:show() end,
-		{ description = "Show hotkeys helper", group = "Action" }
+		{ description = "Показать помощник по горячим клавишам", group = "Действие" }
 	},
 }
 
@@ -68,7 +68,7 @@ appswitcher.keys.all = awful.util.table.join(appswitcher.keys.move, appswitcher.
 appswitcher._fake_keys = {
 	{
 		{}, "N", nil,
-		{ description = "Select app by key", group = "Navigation" }
+		{ description = "Выбрать приложение по ключу", group = "Навигация" }
 	},
 }
 
@@ -217,7 +217,7 @@ function appswitcher:init()
 
 		local tag_text = string.format('<span color="%s">[%s]</span>', style.color.gray, table.concat(client_tags, " "))
 
-		return string.format("%s %s", awful.util.escape(c.name) or "Untitled", tag_text)
+		return string.format("%s %s", awful.util.escape(c.name) or "Без названия", tag_text)
 	end
 
 	-- Function to correct wibox size for given namber of icons

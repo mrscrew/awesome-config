@@ -15,6 +15,8 @@ require("awful.autofocus")
 
 -- User modules
 ------------------------------------------------------------
+os.setlocale(os.getenv("LANG")) -- to localize the clock
+
 local redflat = require("redflat")
 
 -- debug locker
@@ -31,7 +33,7 @@ require("colorless.ercheck-config") -- load file with error handling
 -- Setup theme and environment vars
 -----------------------------------------------------------------------------------------------------------------------
 local env = require("color.blue.env-config") -- load file with environment
-env:init({ theme = "orange" })
+env:init({ theme = "orange" }) 
 
 
 -- Layouts setup

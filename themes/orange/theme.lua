@@ -20,7 +20,7 @@ theme.path = awful.util.get_configuration_dir() .. "themes/orange"
 
 -- Main config
 --------------------------------------------------------------------------------
-theme.panel_height = 36 -- panel height
+theme.panel_height = 24 -- panel height
 theme.wallpaper    = theme.path .. "/wallpaper/custom.png"
 
 -- Setup parent theme settings
@@ -36,34 +36,55 @@ theme.desktop.textset = {
 	color = theme.desktop.color
 }
 
-
 -- Panel widgets
 -----------------------------------------------------------------------------------------------------------------------
+
+-- Circle shaped taglist
+--------------------------------------------------------------
+theme.gauge.tag.orange = {
+	width        = 20,
+	line_width   = 2,
+	radius       = 7,
+	iradius      = 2,
+}
+
+-- Tasklist
+--------------------------------------------------------------
+theme.widget.tasklist = {
+	char_digit = 5,
+	-- task = theme.gauge.task.blue,
+	task = {
+		font       = { size = 12 },
+		text_shift = 10,
+		point      = { size = 4, space = 3, gap = 13 },
+		underline  = { height = 20, thickness = 4, gap = 14, dh = 4 },
+	},
+}
+-- Circle shaped monitor
+--------------------------------------------------------------
+theme.gauge.monitor.circle = {
+    width = 20, -- widget width
+    line_width = 2, -- width of circle
+	radius = 7, -- circle radius
+    iradius = 2, -- radius for center point
+}
 
 -- individual margins for panel widgets
 ------------------------------------------------------------
 theme.widget.wrapper = {
-	layoutbox   = { 12, 10, 6, 6 },
-	textclock   = { 10, 10, 0, 0 },
-	volume      = { 10, 10, 5, 5 },
-	network     = { 4, 4, 5, 5 },
-	keyboard    = { 10, 10, 4, 4 },
-	taglist     = { 4, 4, 0, 0 },
-	mail        = { 10, 10, 4, 4 },
-	battery     = { 0, 5, 0, 0 },
-	cpu         = { 5, 0, 0, 0 },
-	tray        = { 10, 12, 7, 7 },
-	tasklist    = { 6, 0, 0, 0 }, -- centering tasklist widget
+	layoutbox   = { 5, 5, 3, 3 },
+	taglist     = { 5, 5, 3, 3 },
+	textclock   = { 5, 5, 3, 3 },
+	volume      = { 5, 5, 3, 3 },
+	keyboard    = { 5, 5, 3, 3 },
+	mail        = { 5, 5, 3, 3 },
+	network     = { 0, 0, 3, 3 },
+	cpu         = { 5, 5, 3, 3 },
+	mem			= { 5, 5, 3, 3 },
+	battery     = { 5, 5, 3, 3 },
+	tray        = { 5, 5, 3, 3 },
+	tasklist    = { 5, 5, 3, 3 }, -- centering tasklist widget
 }
-
--- Tag (base element of taglist)
-------------------------------------------------------------
-theme.gauge.tag.orange.width = 36
-
--- Tasklist
-------------------------------------------------------------
-theme.widget.tasklist.char_digit = 5
-theme.widget.tasklist.task = theme.gauge.task.blue
 
 -- End
 -----------------------------------------------------------------------------------------------------------------------

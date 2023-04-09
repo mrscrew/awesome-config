@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"Lua.workspace.ignoreSubmodules": false,
+		"Lua.workspace.library": [
+			"/usr/share/awesome/lib"
+		],
+		"Lua.workspace.userThirdParty": [
+			"/usr/share/awesome/lib"
+		]
+	}
+}

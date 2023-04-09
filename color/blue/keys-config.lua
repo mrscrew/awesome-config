@@ -155,7 +155,7 @@ function hotkeys:init(args)
 			end
 		end
 
-		redflat.float.notify:show({ text = "No tips for " .. client.focus.class })
+		redflat.float.notify:show({ text = "Нет подсказок для " .. client.focus.class })
 	end
 
 	-- Keys for widgets
@@ -166,11 +166,11 @@ function hotkeys:init(args)
 	local apprunner_keys_move = {
 		{
 			{ env.mod }, "k", function() apprunner:down() end,
-			{ description = "Select next item", group = "Navigation" }
+			{ description = "Выбрать следующий элемент", group = "Навигация" }
 		},
 		{
 			{ env.mod }, "i", function() apprunner:up() end,
-			{ description = "Select previous item", group = "Navigation" }
+			{ description = "Выбрать предыдущий элемент", group = "Навигация" }
 		},
 	}
 
@@ -182,19 +182,19 @@ function hotkeys:init(args)
 	local menu_keys_move = {
 		{
 			{ env.mod }, "k", redflat.menu.action.down,
-			{ description = "Select next item", group = "Navigation" }
+			{ description = "Выбрать следующий элемент", group = "Навигация" }
 		},
 		{
 			{ env.mod }, "i", redflat.menu.action.up,
-			{ description = "Select previous item", group = "Navigation" }
+			{ description = "Выбрать предыдущий элемент", group = "Навигация" }
 		},
 		{
 			{ env.mod }, "j", redflat.menu.action.back,
-			{ description = "Go back", group = "Navigation" }
+			{ description = "Вернуться", group = "Навигация" }
 		},
 		{
 			{ env.mod }, "l", redflat.menu.action.enter,
-			{ description = "Open submenu", group = "Navigation" }
+			{ description = "Открыть подменю", group = "Навигация" }
 		},
 	}
 
@@ -206,7 +206,7 @@ function hotkeys:init(args)
 	local appswitcher_keys = {
 		{
 			{ env.mod }, "a", function() appswitcher:switch() end,
-			{ description = "Select next app", group = "Navigation" }
+			{ description = "Выбрать следующее приложение", group = "Навигация" }
 		},
 		{
 			{ env.mod, "Shift" }, "a", function() appswitcher:switch() end,
@@ -214,7 +214,7 @@ function hotkeys:init(args)
 		},
 		{
 			{ env.mod }, "q", function() appswitcher:switch({ reverse = true }) end,
-			{ description = "Select previous app", group = "Navigation" }
+			{ description = "Выбрать предыдущее приложение", group = "Навигация" }
 		},
 		{
 			{ env.mod, "Shift" }, "q", function() appswitcher:switch({ reverse = true }) end,
@@ -222,7 +222,7 @@ function hotkeys:init(args)
 		},
 		{
 			{}, "Super_L", function() appswitcher:hide() end,
-			{ description = "Activate and exit", group = "Action" }
+			{ description = "Активировать и выйти", group = "Action" }
 		},
 		{
 			{ env.mod }, "Super_L", function() appswitcher:hide() end,
@@ -234,11 +234,11 @@ function hotkeys:init(args)
 		},
 		{
 			{}, "Return", function() appswitcher:hide() end,
-			{ description = "Activate and exit", group = "Action" }
+			{ description = "Активировать и выйти", group = "Action" }
 		},
 		{
 			{}, "Escape", function() appswitcher:hide(true) end,
-			{ description = "Exit", group = "Action" }
+			{ description = "Выйти", group = "Action" }
 		},
 		{
 			{ env.mod }, "Escape", function() appswitcher:hide(true) end,
@@ -246,7 +246,7 @@ function hotkeys:init(args)
 		},
 		{
 			{ env.mod }, "F1", function() redtip:show()  end,
-			{ description = "Show hotkeys helper", group = "Action" }
+			{ description = "Показать помощник по горячим клавишам", group = "Action" }
 		},
 	}
 
@@ -273,11 +273,11 @@ function hotkeys:init(args)
 		local ik = tostring(i)
 		table.insert(keyseq[3][5][3], {
 			{}, ik, function() qlaunch:run_or_raise(ik) end,
-			{ description = "Run or rise application №" .. ik, group = "Run or Rise", keyset = { ik } }
+			{ description = "Запустить или поднять приложение №" .. ik, group = "Запустить или Поднять", keyset = { ik } }
 		})
 		table.insert(keyseq[3][6][3], {
 			{}, ik, function() qlaunch:run_or_raise(ik, true) end,
-			{ description = "Launch application №".. ik, group = "Quick Launch", keyset = { ik } }
+			{ description = "Запустить приложение №".. ik, group = "Быстрый Запуск", keyset = { ik } }
 		})
 	end
 
@@ -285,11 +285,11 @@ function hotkeys:init(args)
 	keyseq[3][1][3] = {
 		{
 			{}, "f", function() if client.focus then client.focus:kill() end end,
-			{ description = "Kill focused client", group = "Kill application", keyset = { "f" } }
+			{ description = "Закрыть выделенное", group = "Закрытие приложений", keyset = { "f" } }
 		},
 		{
 			{}, "a", kill_all,
-			{ description = "Kill all clients with current tag", group = "Kill application", keyset = { "a" } }
+			{ description = "Закрыть все в текущем теге", group = "Закрытие приложений", keyset = { "a" } }
 		},
 	}
 
@@ -297,73 +297,73 @@ function hotkeys:init(args)
 	keyseq[3][2][3] = {
 		{
 			{}, "p", function () toggle_placement(env) end,
-			{ description = "Switch master/slave window placement", group = "Clients managment", keyset = { "p" } }
+			{ description = "Переключение окна (основной/подчиненный)", group = "Управление клиентами", keyset = { "p" } }
 		},
 	}
 
 	keyseq[3][3][3] = {
 		{
 			{}, "f", restore_client,
-			{ description = "Restore minimized client", group = "Clients managment", keyset = { "f" } }
+			{ description = "Восстановить свернутый клиент", group = "Управление клиентами", keyset = { "f" } }
 		},
 		{
 			{}, "a", restore_all,
-			{ description = "Restore all clients with current tag", group = "Clients managment", keyset = { "a" } }
+			{ description = "Восстановить всех клиентов в текущим теге", group = "Управление клиентами", keyset = { "a" } }
 		},
 	}
 
 	keyseq[3][4][3] = {
 		{
 			{}, "f", function() if client.focus then client.focus.minimized = true end end,
-			{ description = "Minimized focused client", group = "Clients managment", keyset = { "f" } }
+			{ description = "Свернуть сфокусированный клиент", group = "Управление клиентами", keyset = { "f" } }
 		},
 		{
 			{}, "a", minimize_all,
-			{ description = "Minimized all clients with current tag", group = "Clients managment", keyset = { "a" } }
+			{ description = "Свернуть все клиенты в текущем теге", group = "Управление клиентами", keyset = { "a" } }
 		},
 		{
 			{}, "e", minimize_all_except_focused,
-			{ description = "Minimized all clients except focused", group = "Clients managment", keyset = { "e" } }
+			{ description = "Свернуть все клиенты, кроме сфокусированных", group = "Управление клиентами", keyset = { "e" } }
 		},
 	}
 
 
-	-- Layouts
+	-- Макеты
 	--------------------------------------------------------------------------------
 
 	-- shared layout keys
 	local layout_tile = {
 		{
 			{ env.mod }, "l", function () awful.tag.incmwfact( 0.05) end,
-			{ description = "Increase master width factor", group = "Layout" }
+			{ description = "Увеличьте коэффициент ширины мастера", group = "Макет" }
 		},
 		{
 			{ env.mod }, "j", function () awful.tag.incmwfact(-0.05) end,
-			{ description = "Decrease master width factor", group = "Layout" }
+			{ description = "Уменьшить коэффициент ширины мастера", group = "Макет" }
 		},
 		{
 			{ env.mod }, "i", function () awful.client.incwfact( 0.05) end,
-			{ description = "Increase window factor of a client", group = "Layout" }
+			{ description = "Увеличить фактор окна клиента", group = "Макет" }
 		},
 		{
 			{ env.mod }, "k", function () awful.client.incwfact(-0.05) end,
-			{ description = "Decrease window factor of a client", group = "Layout" }
+			{ description = "Уменьшить фактор окна клиента", group = "Макет" }
 		},
 		{
 			{ env.mod, }, "+", function () awful.tag.incnmaster( 1, nil, true) end,
-			{ description = "Increase the number of master clients", group = "Layout" }
+			{ description = "Увеличить количество мастер-клиентов", group = "Макет" }
 		},
 		{
 			{ env.mod }, "-", function () awful.tag.incnmaster(-1, nil, true) end,
-			{ description = "Decrease the number of master clients", group = "Layout" }
+			{ description = "Уменьшить количество мастер-клиентов", group = "Макет" }
 		},
 		{
 			{ env.mod, "Control" }, "+", function () awful.tag.incncol( 1, nil, true) end,
-			{ description = "Increase the number of columns", group = "Layout" }
+			{ description = "Увеличить количество колонок", group = "Макет" }
 		},
 		{
 			{ env.mod, "Control" }, "-", function () awful.tag.incncol(-1, nil, true) end,
-			{ description = "Decrease the number of columns", group = "Layout" }
+			{ description = "Уменьшить количество колонок", group = "Макет" }
 		},
 	}
 
@@ -373,102 +373,102 @@ function hotkeys:init(args)
 	local layout_grid_move = {
 		{
 			{ env.mod }, "KP_Up", function() grid.move_to("up") end,
-			{ description = "Move window up", group = "Movement" }
+			{ description = "Переместить окно вверх", group = "Перемещение" }
 		},
 		{
 			{ env.mod }, "KP_Down", function() grid.move_to("down") end,
-			{ description = "Move window down", group = "Movement" }
+			{ description = "Переместить окно вниз", group = "Перемещение" }
 		},
 		{
 			{ env.mod }, "KP_Left", function() grid.move_to("left") end,
-			{ description = "Move window left", group = "Movement" }
+			{ description = "Переместить окно влево", group = "Перемещение" }
 		},
 		{
 			{ env.mod }, "KP_right", function() grid.move_to("right") end,
-			{ description = "Move window right", group = "Movement" }
+			{ description = "Переместить окно вправо", group = "Перемещение" }
 		},
 		{
 			{ env.mod, "Control" }, "KP_Up", function() grid.move_to("up", true) end,
-			{ description = "Move window up by bound", group = "Movement" }
+			{ description = "Переместить окно вверх по границе", group = "Перемещение" }
 		},
 		{
 			{ env.mod, "Control" }, "KP_Down", function() grid.move_to("down", true) end,
-			{ description = "Move window down by bound", group = "Movement" }
+			{ description = "Переместить окно вниз по границе", group = "Перемещение" }
 		},
 		{
 			{ env.mod, "Control" }, "KP_Left", function() grid.move_to("left", true) end,
-			{ description = "Move window left by bound", group = "Movement" }
+			{ description = "Переместить окно влево по границе", group = "Перемещение" }
 		},
 		{
 			{ env.mod, "Control" }, "KP_Right", function() grid.move_to("right", true) end,
-			{ description = "Move window right by bound", group = "Movement" }
+			{ description = "Переместить окно вправо по границе", group = "Перемещение" }
 		},
 	}
 
 	local layout_grid_resize = {
 		{
 			{ env.mod }, "i", function() grid.resize_to("up") end,
-			{ description = "Inrease window size to the up", group = "Resize" }
+			{ description = "Увеличить размер окна вверх", group = "Изменение размера" }
 		},
 		{
 			{ env.mod }, "k", function() grid.resize_to("down") end,
-			{ description = "Inrease window size to the down", group = "Resize" }
+			{ description = "Увеличить размер окна вниз", group = "Изменение размера" }
 		},
 		{
 			{ env.mod }, "j", function() grid.resize_to("left") end,
-			{ description = "Inrease window size to the left", group = "Resize" }
+			{ description = "Увеличить размер окна влево", group = "Изменение размера" }
 		},
 		{
 			{ env.mod }, "l", function() grid.resize_to("right") end,
-			{ description = "Inrease window size to the right", group = "Resize" }
+			{ description = "Увеличить размер окна вправо", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Shift" }, "i", function() grid.resize_to("up", nil, true) end,
-			{ description = "Decrease window size from the up", group = "Resize" }
+			{ description = "Уменьшить размер окна сверху", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Shift" }, "k", function() grid.resize_to("down", nil, true) end,
-			{ description = "Decrease window size from the down", group = "Resize" }
+			{ description = "Уменьшить размер окна снизу", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Shift" }, "j", function() grid.resize_to("left", nil, true) end,
-			{ description = "Decrease window size from the left", group = "Resize" }
+			{ description = "Уменьшить размер окна слева", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Shift" }, "l", function() grid.resize_to("right", nil, true) end,
-			{ description = "Decrease window size from the right", group = "Resize" }
+			{ description = "Уменьшить размер окна справа", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Control" }, "i", function() grid.resize_to("up", true) end,
-			{ description = "Increase window size to the up by bound", group = "Resize" }
+			{ description = "Увеличить размер окна вверх по границе", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Control" }, "k", function() grid.resize_to("down", true) end,
-			{ description = "Increase window size to the down by bound", group = "Resize" }
+			{ description = "Увеличить размер окна вниз по границе", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Control" }, "j", function() grid.resize_to("left", true) end,
-			{ description = "Increase window size to the left by bound", group = "Resize" }
+			{ description = "Увеличить размер окна влево по границе", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Control" }, "l", function() grid.resize_to("right", true) end,
-			{ description = "Increase window size to the right by bound", group = "Resize" }
+			{ description = "Увеличить размер окна вправопо границе", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Control", "Shift" }, "i", function() grid.resize_to("up", true, true) end,
-			{ description = "Decrease window size from the up by bound ", group = "Resize" }
+			{ description = "Уменьшить размер окна сверху на границу ", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Control", "Shift" }, "k", function() grid.resize_to("down", true, true) end,
-			{ description = "Decrease window size from the down by bound ", group = "Resize" }
+			{ description = "Уменьшить размер окна снизу на границу ", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Control", "Shift" }, "j", function() grid.resize_to("left", true, true) end,
-			{ description = "Decrease window size from the left by bound ", group = "Resize" }
+			{ description = "Уменьшить размер окна слева на границу ", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Control", "Shift" }, "l", function() grid.resize_to("right", true, true) end,
-			{ description = "Decrease window size from the right by bound ", group = "Resize" }
+			{ description = "Уменьшить размер окна справа на границу ", group = "Изменение размера" }
 		},
 	}
 
@@ -479,98 +479,98 @@ function hotkeys:init(args)
 	local layout_map_layout = {
 		{
 			{ env.mod }, "s", function() map.swap_group() end,
-			{ description = "Change placement direction for group", group = "Layout" }
+			{ description = "Изменить направление размещения для группы", group = "Макет" }
 		},
 		{
 			{ env.mod }, "v", function() map.new_group(true) end,
-			{ description = "Create new vertical group", group = "Layout" }
+			{ description = "Создать новую вертикальную группу", group = "Макет" }
 		},
 		{
 			{ env.mod }, "h", function() map.new_group(false) end,
-			{ description = "Create new horizontal group", group = "Layout" }
+			{ description = "Создать новую горизонтальную группу", group = "Макет" }
 		},
 		{
 			{ env.mod, "Control" }, "v", function() map.insert_group(true) end,
-			{ description = "Insert new vertical group before active", group = "Layout" }
+			{ description = "Вставить новую вертикальную группу перед активной", group = "Макет" }
 		},
 		{
 			{ env.mod, "Control" }, "h", function() map.insert_group(false) end,
-			{ description = "Insert new horizontal group before active", group = "Layout" }
+			{ description = "Вставить новую горизонтальную группу перед активной", group = "Макет" }
 		},
 		{
 			{ env.mod }, "d", function() map.delete_group() end,
-			{ description = "Destroy group", group = "Layout" }
+			{ description = "Уничтожить группу", group = "Макет" }
 		},
 		{
 			{ env.mod, "Control" }, "d", function() map.clean_groups() end,
-			{ description = "Destroy all empty groups", group = "Layout" }
+			{ description = "Уничтожить все пустые группы", group = "Макет" }
 		},
 		{
 			{ env.mod }, "f", function() map.set_active() end,
-			{ description = "Set active group", group = "Layout" }
+			{ description = "Установить активную группу", group = "Макет" }
 		},
 		{
 			{ env.mod }, "g", function() map.move_to_active() end,
-			{ description = "Move focused client to active group", group = "Layout" }
+			{ description = "Переместить сфокусированного клиента в активную группу", group = "Макет" }
 		},
 		{
 			{ env.mod, "Control" }, "f", function() map.hilight_active() end,
-			{ description = "Hilight active group", group = "Layout" }
+			{ description = "Выделить активную группу", group = "Макет" }
 		},
 		{
 			{ env.mod }, "a", function() map.switch_active(1) end,
-			{ description = "Activate next group", group = "Layout" }
+			{ description = "Активировать следующую группу", group = "Макет" }
 		},
 		{
 			{ env.mod }, "q", function() map.switch_active(-1) end,
-			{ description = "Activate previous group", group = "Layout" }
+			{ description = "Активировать предыдущую группу", group = "Макет" }
 		},
 		{
 			{ env.mod }, "]", function() map.move_group(1) end,
-			{ description = "Move active group to the top", group = "Layout" }
+			{ description = "Переместить активную группу наверх", group = "Макет" }
 		},
 		{
 			{ env.mod }, "[", function() map.move_group(-1) end,
-			{ description = "Move active group to the bottom", group = "Layout" }
+			{ description = "Переместить активную группу вниз", group = "Макет" }
 		},
 		{
 			{ env.mod }, "r", function() map.reset_tree() end,
-			{ description = "Reset layout structure", group = "Layout" }
+			{ description = "Сбросить структуру макета", group = "Макет" }
 		},
 	}
 
 	local layout_map_resize = {
 		{
 			{ env.mod }, "j", function() map.incfactor(nil, 0.1, false) end,
-			{ description = "Increase window horizontal size factor", group = "Resize" }
+			{ description = "Увеличить коэффициент горизонтального размера окна", group = "Изменение размера" }
 		},
 		{
 			{ env.mod }, "l", function() map.incfactor(nil, -0.1, false) end,
-			{ description = "Decrease window horizontal size factor", group = "Resize" }
+			{ description = "Уменьшить коэффициент горизонтального размера окна", group = "Изменение размера" }
 		},
 		{
 			{ env.mod }, "i", function() map.incfactor(nil, 0.1, true) end,
-			{ description = "Increase window vertical size factor", group = "Resize" }
+			{ description = "Увеличить коэффициент вертикального размера окна", group = "Изменение размера" }
 		},
 		{
 			{ env.mod }, "k", function() map.incfactor(nil, -0.1, true) end,
-			{ description = "Decrease window vertical size factor", group = "Resize" }
+			{ description = "Уменьшить коэффициент вертикального размера окна", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Control" }, "j", function() map.incfactor(nil, 0.1, false, true) end,
-			{ description = "Increase group horizontal size factor", group = "Resize" }
+			{ description = "Увеличить коэффициент горизонтального размера группы", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Control" }, "l", function() map.incfactor(nil, -0.1, false, true) end,
-			{ description = "Decrease group horizontal size factor", group = "Resize" }
+			{ description = "Уменьшить коэффициент горизонтального размера группы", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Control" }, "i", function() map.incfactor(nil, 0.1, true, true) end,
-			{ description = "Increase group vertical size factor", group = "Resize" }
+			{ description = "Увеличить коэффициент вертикального размера группы", group = "Изменение размера" }
 		},
 		{
 			{ env.mod, "Control" }, "k", function() map.incfactor(nil, -0.1, true, true) end,
-			{ description = "Decrease group vertical size factor", group = "Resize" }
+			{ description = "Уменьшить коэффициент вертикального размера группы", group = "Изменение размера" }
 		},
 	}
 
@@ -583,198 +583,198 @@ function hotkeys:init(args)
 	self.raw.root = {
 		{
 			{ env.mod }, "F1", function() redtip:show() end,
-			{ description = "[Hold] Show awesome hotkeys helper", group = "Main" }
+			{ description = "[Удерживать] Показать помощник по горячим клавишам Awesome", group = "Основные" }
 		},
 		{
 			{ env.mod, "Control" }, "F1", function() apphelper(appkeys) end,
-			{ description = "[Hold] Show hotkeys helper for application", group = "Main" }
+			{ description = "[Удерживать] Показать помощник по горячим клавишам для приложения", group = "Основные" }
 		},
 		{
 			{ env.mod }, "c", function() redflat.float.keychain:activate(keyseq, "User") end,
-			{ description = "[Hold] User key sequence", group = "Main" }
+			{ description = "[Удерживать] Последовательность клавиш пользователя", group = "Основные" }
 		},
 
 		{
 			{ env.mod }, "F2", function () redflat.service.navigator:run() end,
-			{ description = "[Hold] Tiling window control mode", group = "Window control" }
+			{ description = "[Удерживать] Режим управления мозаичным окном", group = "Управление окном" }
 		},
 		{
 			{ env.mod }, "h", function() redflat.float.control:show() end,
-			{ description = "[Hold] Floating window control mode", group = "Window control" }
+			{ description = "[Удерживать] Режим управления плавающим окном", group = "Управление окном" }
 		},
 
 		{
 			{ env.mod }, "Return", function() awful.spawn(env.terminal) end,
-			{ description = "Open a terminal", group = "Actions" }
+			{ description = "Открыть терминал", group = "Действия" }
 		},
 		{
 			{ env.mod, "Mod1" }, "space", function() awful.spawn("gpaste-client ui") end,
-			{ description = "Clipboard manager", group = "Actions" }
+			{ description = "Менеджер буфера обмена", group = "Действия" }
 		},
 		{
 			{ env.mod, "Control" }, "r", awesome.restart,
-			{ description = "Reload WM", group = "Actions" }
+			{ description = "Перезагрузить Awesome", group = "Действия" }
 		},
 
 		{
 			{ env.mod }, "l", focus_switch_byd("right"),
-			{ description = "Go to right client", group = "Client focus" }
+			{ description = "Перейти к правому клиенту", group = "Фокусировка клиента" }
 		},
 		{
 			{ env.mod }, "j", focus_switch_byd("left"),
-			{ description = "Go to left client", group = "Client focus" }
+			{ description = "Перейти к левому клиенту", group = "Фокусировка клиента" }
 		},
 		{
 			{ env.mod }, "i", focus_switch_byd("up"),
-			{ description = "Go to upper client", group = "Client focus" }
+			{ description = "Перейти к верхнему клиенту", group = "Фокусировка клиента" }
 		},
 		{
 			{ env.mod }, "k", focus_switch_byd("down"),
-			{ description = "Go to lower client", group = "Client focus" }
+			{ description = "Перейти к нижнему клиенту", group = "Фокусировка клиента" }
 		},
 		{
 			{ env.mod }, "u", awful.client.urgent.jumpto,
-			{ description = "Go to urgent client", group = "Client focus" }
+			{ description = "Перейти к срочному клиенту", group = "Фокусировка клиента" }
 		},
 		{
 			{ env.mod }, "Tab", focus_to_previous,
-			{ description = "Go to previos client", group = "Client focus" }
+			{ description = "Перейти к предыдущему клиенту", group = "Фокусировка клиента" }
 		},
 
 		{
 			{ env.mod }, "w", function() mainmenu:show() end,
-			{ description = "Show main menu", group = "Widgets" }
+			{ description = "Показать главное меню", group = "Виджеты" }
 		},
 		{
 			{ env.mod }, "r", function() apprunner:show() end,
-			{ description = "Application launcher", group = "Widgets" }
+			{ description = "Средство запуска приложений", group = "Виджеты" }
 		},
 		{
 			{ env.mod }, "p", function() redflat.float.prompt:run() end,
-			{ description = "Show the prompt box", group = "Widgets" }
+			{ description = "Показать окно быстрого запуска", group = "Виджеты" }
 		},
 		{
 			{ env.mod }, "x", function() redflat.float.top:show("cpu") end,
-			{ description = "Show the top process list", group = "Widgets" }
+			{ description = "Показать список основных процессов", group = "Виджеты" }
 		},
 		{
 			{ env.mod, "Control" }, "m", function() redflat.widget.mail:update(true) end,
-			{ description = "Check new mail", group = "Widgets" }
+			{ description = "Проверить новую почту", group = "Виджеты" }
 		},
 		{
 			{ env.mod, "Control" }, "i", function() redflat.widget.minitray:toggle() end,
-			{ description = "Show minitray", group = "Widgets" }
+			{ description = "Показать минитрей", group = "Виджеты" }
 		},
 		{
 			{ env.mod, "Control" }, "u", function() redflat.widget.updates:update(true) end,
-			{ description = "Check available updates", group = "Widgets" }
+			{ description = "Проверить доступные обновления", group = "Виджеты" }
 		},
 		{
 			{ env.mod }, "g", function() qlaunch:show() end,
-			{ description = "Application quick launcher", group = "Widgets" }
+			{ description = "Быстрый запуск приложений", group = "Виджеты" }
 		},
 		{
 			{ env.mod }, "z", function() redflat.service.logout:show() end,
-			{ description = "Log out screen", group = "Widgets" }
+			{ description = "Экран выхода", group = "Виджеты" }
 		},
 
 		{
 			{ env.mod }, "y", function() laybox:toggle_menu(mouse.screen.selected_tag) end,
-			{ description = "Show layout menu", group = "Layouts" }
+			{ description = "Показать меню макета", group = "Макеты" }
 		},
 		{
 			{ env.mod}, "Up", function() awful.layout.inc(1) end,
-			{ description = "Select next layout", group = "Layouts" }
+			{ description = "Выбрать следующий макет", group = "Макеты" }
 		},
 		{
 			{ env.mod }, "Down", function() awful.layout.inc(-1) end,
-			{ description = "Select previous layout", group = "Layouts" }
+			{ description = "Выбрать предыдущий макет", group = "Макеты" }
 		},
 
 		{
 			{}, "XF86MonBrightnessUp", function() brightness({ step = 2 }) end,
-			{ description = "Increase brightness", group = "Brightness control" }
+			{ description = "Увеличить яркость", group = "Контроль яркости" }
 		},
 		{
 			{}, "XF86MonBrightnessDown", function() brightness({ step = 2, down = true }) end,
-			{ description = "Reduce brightness", group = "Brightness control" }
+			{ description = "Уменьшить яркость", group = "Контроль яркости" }
 		},
 
 		{
 			{}, "XF86AudioRaiseVolume", volume_raise,
-			{ description = "Increase volume", group = "Volume control" }
+			{ description = "Увеличить громкость", group = "Контроль громкости" }
 		},
 		{
 			{}, "XF86AudioLowerVolume", volume_lower,
-			{ description = "Reduce volume", group = "Volume control" }
+			{ description = "Уменьшить громкость", group = "Контроль громкости" }
 		},
 		{
 			{}, "XF86AudioMute", volume_mute,
-			{ description = "Mute audio", group = "Volume control" }
+			{ description = "Отключить звук", group = "Контроль громкости" }
 		},
 
 		{
 			{ env.mod }, "a", nil, function() appswitcher:show({ filter = current }) end,
-			{ description = "Switch to next with current tag", group = "Application switcher" }
+			{ description = "Перейти к следующему в текущем теге", group = "Переключатель приложений" }
 		},
 		{
 			{ env.mod }, "q", nil, function() appswitcher:show({ filter = current, reverse = true }) end,
-			{ description = "Switch to previous with current tag", group = "Application switcher" }
+			{ description = "Перейти к предыдущему в текущем теге", group = "Переключатель приложений" }
 		},
 		{
 			{ env.mod, "Shift" }, "a", nil, function() appswitcher:show({ filter = allscr }) end,
-			{ description = "Switch to next through all tags", group = "Application switcher" }
+			{ description = "Перейти к следующему через все теги", group = "Переключатель приложений" }
 		},
 		{
 			{ env.mod, "Shift" }, "q", nil, function() appswitcher:show({ filter = allscr, reverse = true }) end,
-			{ description = "Switch to previous through all tags", group = "Application switcher" }
+			{ description = "Перейти к предыдущему через все теги", group = "Переключатель приложений" }
 		},
 
 		{
 			{ env.mod }, "Escape", awful.tag.history.restore,
-			{ description = "Go previos tag", group = "Tag navigation" }
+			{ description = "Перейти к предыдущему тегу", group = "Навигация по тегам" }
 		},
 		{
 			{ env.mod }, "Right", awful.tag.viewnext,
-			{ description = "View next tag", group = "Tag navigation" }
+			{ description = "Посмотреть следующий тег", group = "Навигация по тегам" }
 		},
 		{
 			{ env.mod }, "Left", awful.tag.viewprev,
-			{ description = "View previous tag", group = "Tag navigation" }
+			{ description = "Посмотреть предыдущий тег", group = "Навигация по тегам" }
 		},
 
 		{
 			{ env.mod }, "t", function() redtitle.toggle(client.focus) end,
-			{ description = "Show/hide titlebar for focused client", group = "Titlebar" }
+			{ description = "Показать/скрыть заголовок для сфокусированного клиента", group = "Заголовок" }
 		},
 		--{
 		--	{ env.mod, "Control" }, "t", function() redtitle.switch(client.focus) end,
-		--	{ description = "Switch titlebar view for focused client", group = "Titlebar" }
+		--	{ description = "Switch titlebar view for focused client", group = "Заголовок" }
 		--},
 		{
 			{ env.mod, "Shift" }, "t", function() redtitle.toggle_all() end,
-			{ description = "Show/hide titlebar for all clients", group = "Titlebar" }
+			{ description = "Показать/скрыть заголовок для всех клиентов", group = "Заголовок" }
 		},
 		{
 			{ env.mod, "Control", "Shift" }, "t", function() redtitle.global_switch() end,
-			{ description = "Switch titlebar view for all clients", group = "Titlebar" }
+			{ description = "Переключить видимость заголовка для всех клиентов", group = "Заголовок" }
 		},
 
 		{
 			{ env.mod }, "e", function() redflat.float.player:show(rb_corner()) end,
-			{ description = "Show/hide widget", group = "Audio player" }
+			{ description = "Показать/скрыть виджет", group = "Аудиоплеер" }
 		},
 		{
 			{}, "XF86AudioPlay", function() redflat.float.player:action("PlayPause") end,
-			{ description = "Play/Pause track", group = "Audio player" }
+			{ description = "Воспроизведение/Пауза трека", group = "Аудиоплеер" }
 		},
 		{
 			{}, "XF86AudioNext", function() redflat.float.player:action("Next") end,
-			{ description = "Next track", group = "Audio player" }
+			{ description = "Следующий трек", group = "Аудиоплеер" }
 		},
 		{
 			{}, "XF86AudioPrev", function() redflat.float.player:action("Previous") end,
-			{ description = "Previous track", group = "Audio player" }
+			{ description = "Предыдущий трек", group = "Аудиоплеер" }
 		},
 
 		{
@@ -783,32 +783,32 @@ function hotkeys:init(args)
 		}
 	}
 
-	-- Client keys
+	-- Ключи клиента
 	--------------------------------------------------------------------------------
 	self.raw.client = {
 		{
 			{ env.mod }, "f", function(c) c.fullscreen = not c.fullscreen; c:raise() end,
-			{ description = "Toggle fullscreen", group = "Client keys" }
+			{ description = "Полный экран", group = "Ключи клиента" }
 		},
 		{
 			{ env.mod }, "F4", function(c) c:kill() end,
-			{ description = "Close", group = "Client keys" }
+			{ description = "Закрыть", group = "Ключи клиента" }
 		},
 		{
 			{ env.mod, "Control" }, "f", awful.client.floating.toggle,
-			{ description = "Toggle floating", group = "Client keys" }
+			{ description = "Плавающий", group = "Ключи клиента" }
 		},
 		{
 			{ env.mod, "Control" }, "o", function(c) c.ontop = not c.ontop end,
-			{ description = "Toggle keep on top", group = "Client keys" }
+			{ description = "Держать наверху", group = "Ключи клиента" }
 		},
 		{
 			{ env.mod }, "n", function(c) c.minimized = true end,
-			{ description = "Minimize", group = "Client keys" }
+			{ description = "Свернуть", group = "Ключи клиента" }
 		},
 		{
 			{ env.mod }, "m", function(c) c.maximized = not c.maximized; c:raise() end,
-			{ description = "Maximize", group = "Client keys" }
+			{ description = "Развернуть", group = "Ключи клиента" }
 		}
 	}
 
@@ -835,19 +835,19 @@ function hotkeys:init(args)
 	self.fake.numkeys = {
 		{
 			{ env.mod }, "1..9", nil,
-			{ description = "Switch to tag", group = "Numeric keys", keyset = numkeys }
+			{ description = "Переключиться на тег", group = "Цифровые клавиши", keyset = numkeys }
 		},
 		{
 			{ env.mod, "Control" }, "1..9", nil,
-			{ description = "Toggle tag", group = "Numeric keys", keyset = numkeys }
+			{ description = "Переключить тег", group = "Цифровые клавиши", keyset = numkeys }
 		},
 		{
 			{ env.mod, "Shift" }, "1..9", nil,
-			{ description = "Move focused client to tag", group = "Numeric keys", keyset = numkeys }
+			{ description = "Переместить сфокусированного клиента в тег", group = "Цифровые клавиши", keyset = numkeys }
 		},
 		{
 			{ env.mod, "Control", "Shift" }, "1..9", nil,
-			{ description = "Toggle focused client on tag", group = "Numeric keys", keyset = numkeys }
+			{ description = "Переключить сфокусированный клиент на тег", group = "Цифровые клавиши", keyset = numkeys }
 		},
 	}
 

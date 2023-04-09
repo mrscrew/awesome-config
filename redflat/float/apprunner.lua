@@ -34,27 +34,27 @@ local lastquery
 apprunner.keys.move = {
 	{
 		{}, "Down", function() apprunner:down() end,
-		{ description = "Select next item", group = "Navigation" }
+		{ description = "Выбрать следующий элемент", group = "Навигация" }
 	},
 	{
 		{}, "Up", function() apprunner:up() end,
-		{ description = "Select previous item", group = "Navigation" }
+		{ description = "Выбрать предыдущий элемент", group = "Навигация" }
 	},
 }
 
 apprunner.keys.action = {
 	{
 		{ "Mod4" }, "F1", function() redtip:show() end,
-		{ description = "Show hotkeys helper", group = "Action" }
+		{ description = "Показать помощник по горячим клавишам", group = "Действие" }
 	},
 	-- fake keys used for hotkeys helper
 	{
 		{}, "Enter", nil,
-		{ description = "Activate item", group = "Action" }
+		{ description = "Активировать элемент", group = "Действие" }
 	},
 	{
 		{}, "Escape", nil,
-		{ description = "Close widget", group = "Action" }
+		{ description = "Закрыть виджет", group = "Действие" }
 	},
 }
 
@@ -127,7 +127,7 @@ local function construct_item(style)
 		item.name:set_markup(name_text)
 
 		local comment_text = args.Comment and awful.util.escape(args.Comment)
-		                     or args.Name and "No description"
+		                     or args.Name and "Нет описания"
 		                     or ""
 		item.comment:set_markup(comment_text)
 

@@ -294,16 +294,16 @@ function dfparser.menu(style)
 	-- Categories list
 	--------------------------------------------------------------------------------
 	local categories = {
-		{ app_type = "AudioVideo",  name = "Multimedia",   icon_name = "applications-multimedia" },
-		{ app_type = "Development", name = "Development",  icon_name = "applications-development" },
-		{ app_type = "Education",   name = "Education",    icon_name = "applications-science" },
-		{ app_type = "Game",        name = "Games",        icon_name = "applications-games" },
-		{ app_type = "Graphics",    name = "Graphics",     icon_name = "applications-graphics" },
-		{ app_type = "Office",      name = "Office",       icon_name = "applications-office" },
-		{ app_type = "Network",     name = "Internet",     icon_name = "applications-internet" },
-		{ app_type = "Settings",    name = "Settings",     icon_name = "applications-utilities" },
-		{ app_type = "System",      name = "System Tools", icon_name = "applications-system" },
-		{ app_type = "Utility",     name = "Accessories",  icon_name = "applications-accessories" }
+		{ app_type = "AudioVideo",  name = "Мультимедиа",   icon_name = "applications-multimedia" },
+		{ app_type = "Development", name = "Разработка",  	icon_name = "applications-development" },
+		{ app_type = "Education",   name = "Обучение",    	icon_name = "applications-science" },
+		{ app_type = "Game",        name = "Игры",        	icon_name = "applications-games" },
+		{ app_type = "Graphics",    name = "Графика",     	icon_name = "applications-graphics" },
+		{ app_type = "Office",      name = "Офис",       	icon_name = "applications-office" },
+		{ app_type = "Network",     name = "Интернет",     	icon_name = "applications-internet" },
+		{ app_type = "Settings",    name = "Настройки",     icon_name = "applications-utilities" },
+		{ app_type = "System",      name = "Система", 		icon_name = "applications-system" },
+		{ app_type = "Utility",     name = "Инструменты", 	icon_name = "applications-accessories" }
 	}
 
 	-- Find icons for categories

@@ -45,7 +45,6 @@ end
 -- Initialize minitray floating window
 -----------------------------------------------------------------------------------------------------------------------
 function minitray:init(style)
-
 	-- Create wibox for tray
 	--------------------------------------------------------------------------------
 	local wargs = {
@@ -86,7 +85,6 @@ end
 -- Update Geometry
 --------------------------------------------------------------------------------
 function minitray:update_geometry()
-
 	-- Set wibox size and position
 	------------------------------------------------------------
 	local items = awesome.systray()
@@ -132,10 +130,9 @@ end
 -- @param style Settings for dotcount widget
 -----------------------------------------------------------------------------------------------------------------------
 function minitray.new(_, style)
-
 	-- Initialize vars
 	--------------------------------------------------------------------------------
---	args = args or {} -- usesless now, leave it be for backward compatibility and future cases
+	--	args = args or {} -- usesless now, leave it be for backward compatibility and future cases
 	style = redutil.table.merge(default_style(), style or {})
 
 	-- Initialize minitray window

@@ -59,49 +59,49 @@ control.keys = {}
 control.keys.control = {
 	{
 		{ "Mod4" }, "c", function() control:center() end,
-		{ description = "Put window at the center", group = "Window control" }
+		{ description = "Поместите окно в центр", group = "Управление окном" }
 	},
 	{
 		{ "Mod4" }, "q", function() control:resize() end,
-		{ description = "Increase window size", group = "Window control" }
+		{ description = "Увеличить размер окна", group = "Управление окном" }
 	},
 	{
 		{ "Mod4" }, "a", function() control:resize(true) end,
-		{ description = "Decrease window size", group = "Window control" }
+		{ description = "Уменьшить размер окна", group = "Управление окном" }
 	},
 	{
 		{ "Mod4" }, "l", function() control:move("right") end,
-		{ description = "Move window to right", group = "Window control" }
+		{ description = "Переместить окно вправо", group = "Управление окном" }
 	},
 	{
 		{ "Mod4" }, "j", function() control:move("left") end,
-		{ description = "Move window to left", group = "Window control" }
+		{ description = "Переместить окно влево", group = "Управление окном" }
 	},
 	{
 		{ "Mod4" }, "k", function() control:move("bottom") end,
-		{ description = "Move window to bottom", group = "Window control" }
+		{ description = "Переместить окно вниз", group = "Управление окном" }
 	},
 	{
 		{ "Mod4" }, "i", function() control:move("top") end,
-		{ description = "Move window to top", group = "Window control" }
+		{ description = "Переместить окно вверх", group = "Управление окном" }
 	},
 	{
 		{ "Mod4" }, "n", function() control:switch_resize_mode() end,
-		{ description = "Switch moving/resizing mode", group = "Mode" }
+		{ description = "Переключить режим перемещения/изменения размера", group = "Режим" }
 	},
 	{
 		{ "Mod4" }, "s", function() control:switch_onscreen() end,
-		{ description = "Switch off screen check", group = "Mode" }
+		{ description = "Отключить проверку экрана", group = "Режим" }
 	},
 }
 control.keys.action = {
 	{
 		{ "Mod4" }, "Super_L", function() control:hide() end,
-		{ description = "Close top list widget", group = "Action" }
+		{ description = "Закрыть виджет верхнего списка", group = "Действие" }
 	},
 	{
 		{ "Mod4" }, "F1", function() redtip:show() end,
-		{ description = "Show hotkeys helper", group = "Action" }
+		{ description = "Показать помощник по горячим клавишам", group = "Действие" }
 	},
 }
 
@@ -110,7 +110,7 @@ control.keys.all = awful.util.table.join(control.keys.control, control.keys.acti
 control._fake_keys = {
 	{
 		{}, "N", nil,
-		{ description = "Select move/resize step", group = "Mode",
+		{ description = "Выберите шаг перемещения/изменения размера", group = "Режим",
 		  keyset = { "1", "2", "3", "4", "5", "6", "7", "8", "9" } }
 	},
 }
@@ -193,7 +193,7 @@ function control:init()
 	self:set_keys()
 end
 
--- Window control
+-- Управление окном
 -----------------------------------------------------------------------------------------------------------------------
 
 -- Put window at center of screen
@@ -308,7 +308,7 @@ function control:show()
 		                    and not client.focus.maximized
 
 		if not is_floating then
-			rednotify:show(redutil.table.merge({ text = "No floating window focused" }, self.style.notify))
+			rednotify:show(redutil.table.merge({ text = "Плавающее окно не сфокусировано" }, self.style.notify))
 			return
 		end
 		self.client = client.focus

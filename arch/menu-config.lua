@@ -46,8 +46,8 @@ function menu:init(args)
 	local awesomemenu = {
 		{ "Перезапуск",         awesome.restart,                  micon("gnome-session-reboot") },
 		separator,
-		{ "Awesome config",  env.fm .. " .config/awesome",        micon("folder-bookmarks") },
-		{ "Awesome lib",     env.fm .. " /usr/share/awesome/lib", micon("folder-bookmarks") }
+		{ "Папка настроек",		env.fm .. " .config/awesome",        micon("folder-bookmarks") },
+		{ "Папка библиотек",	env.fm .. " /usr/share/awesome/lib", micon("folder-bookmarks") }
 	}
 
 	-- Places submenu
@@ -83,7 +83,7 @@ function menu:init(args)
 			{ "Места",      placesmenu,   micon("folder_home"), key = "c" },
 			separator,
 			{ "Терминал",	env.terminal, micon("terminal") },
-			{ "Nemo",       env.fm,       micon("folder"), key = "n" },
+			{ "Файловый менеджер",       env.fm,       micon("folder"), key = "n" },
 			{ "Ranger",     ranger_comm,  micon("folder"), key = "r" },
 			{ "Редактор",   "code",       micon("code") },
 			separator,

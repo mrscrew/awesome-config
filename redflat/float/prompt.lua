@@ -52,7 +52,7 @@ function floatprompt:init(args)
 	--------------------------------------------------------------------------------
 	self.widget = wibox.widget.textbox()
 	self.widget:set_ellipsize("start")
-	self.prompt = args.prompt or " Run: "
+	self.prompt = args.prompt or " Выполнить: "
 	self.decorated_widget = decoration.textfield(self.widget, style.field)
 
 	-- Create floating wibox for promt widget

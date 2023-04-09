@@ -21,39 +21,39 @@ theme.useless_gap         = 4  -- useless gap
 -- Fonts
 ------------------------------------------------------------
 theme.fonts = {
-	main     = "Roboto 13",      -- main font
-	menu     = "Roboto 13",      -- main menu font
-	tooltip  = "Roboto 13",      -- tooltip font
-	notify   = "Play bold 14",   -- redflat notify popup font
-	clock    = "Play bold 12",   -- textclock widget font
-	qlaunch  = "Play bold 14",   -- quick launch key label font
-	logout   = "Play bold 14",   -- logout screen labels
-	keychain = "Play bold 16",   -- key sequence tip font
-	title    = "Roboto bold 13", -- widget titles font
+	main     = "Roboto 9",      -- main font
+	menu     = "Roboto 9",      -- main menu font
+	tooltip  = "Roboto 9",      -- tooltip font
+	notify   = "Play bold 12",   -- redflat notify popup font
+	clock    = "Play bold 10",   -- textclock widget font
+	qlaunch  = "Play bold 12",   -- quick launch key label font
+	logout   = "Play bold 12",   -- logout screen labels
+	keychain = "Play bold 14",   -- key sequence tip font
+	title    = "Roboto bold 9", -- widget titles font
 	tiny     = "Roboto bold 10", -- smallest font for widgets
-	titlebar = "Roboto bold 13", -- client titlebar font
+	titlebar = "Roboto bold 9", -- client titlebar font
 	logout   = {
-		label   = "Play bold 14", -- logout option labels
+		label   = "Play bold 12", -- logout option labels
 		counter = "Play bold 24", -- logout counter
 	},
 	hotkeys  = {
-		main  = "Roboto 14",             -- hotkeys helper main font
-		key   = "Iosevka Term Light 14", -- hotkeys helper key font (use monospace for align)
-		title = "Roboto bold 16",        -- hotkeys helper group title font
+		main  = "Roboto 10",             -- hotkeys helper main font
+		key   = "Iosevka Term Light 10", -- hotkeys helper key font (use monospace for align)
+		title = "Roboto bold 10",        -- hotkeys helper group title font
 	},
 	player   = {
-		main = "Play bold 13", -- player widget main font
+		main = "Play bold 9", -- player widget main font
 		time = "Play bold 15", -- player widget current time font
 	},
 	-- very custom calendar fonts
 	calendar = {
-		clock = "Play bold 28", date = "Play 16", week_numbers = "Play 12", weekdays_header = "Play 12",
-		days  = "Play 14", default = "Play 14", focus = "Play 12 Bold", controls = "Play bold 16"
+		clock = "Play bold 28", date = "Play 14", week_numbers = "Play 10", weekdays_header = "Play 10",
+		days  = "Play 12", default = "Play 12", focus = "Play 10 Bold", controls = "Play bold 14"
 	},
 }
 
 theme.cairo_fonts = {
-	tag         = { font = "Play", size = 16, face = 1 }, -- tag widget font
+	tag         = { font = "Play", size = 14, face = 1 }, -- tag widget font
 	appswitcher = { font = "Play", size = 20, face = 1 }, -- appswitcher widget font
 	navigator   = {
 		title = { font = "Play", size = 28, face = 1, slant = 0 }, -- window navigation title font
@@ -227,7 +227,7 @@ function theme:update()
 
 	-- Hotkeys helper
 	------------------------------------------------------------
-	self.float.hotkeys.geometry = { width = 1800 }
+	self.float.hotkeys.geometry = { width = 1024, height = 768 }
 	self.float.hotkeys.heights = { key = 26, title = 32 }
 
 	-- Key sequence tip

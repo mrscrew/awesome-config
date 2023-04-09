@@ -675,41 +675,41 @@ function hotkeys:init(args)
     self.raw.root = {{{env.mod}, "F1", function()
         redtip:show()
     end, {
-        description = "[Hold] Show awesome hotkeys helper",
-        group = "Main"
+        description = "[Удерживать] Показать справку по горячим клавишам",
+        group = "Основные"
     }}, {{env.mod, "Control"}, "F1", function()
         apphelper(appkeys)
     end, {
-        description = "[Hold] Показать помощник по горячим клавишам for application",
-        group = "Main"
+        description = "[Удерживать] Показать справку по горячим клавишам для приложения",
+        group = "Основные"
     }}, {{env.mod}, "c", function()
         redflat.float.keychain:activate(keyseq, "User")
     end, {
-        description = "[Hold] User key sequence",
-        group = "Main"
+        description = "[Удерживать] Последовательность пользовательских клавиш",
+        group = "Основные"
     }}, {{env.mod}, "F2", function()
         redflat.service.navigator:run()
     end, {
-        description = "[Hold] Tiling window control mode",
-        group = "Window control"
+        description = "[Удерживать] Режим управления плиточным окном",
+        group = "Управление окном"
     }}, {{env.mod}, "h", function()
         redflat.float.control:show()
     end, {
-        description = "[Hold] Floating window control mode",
-        group = "Window control"
+        description = "[Удерживать] Режим управления плавающим окном",
+        group = "Управление окном"
     }}, {{env.mod}, "Return", function()
         awful.spawn(env.terminal)
     end, {
-        description = "Open a terminal",
-        group = "Actions"
+        description = "Открыть терминал",
+        group = "Действия"
     }}, {{env.mod, "Mod1"}, "space", function()
         awful.spawn("gpaste-client ui")
     end, {
         description = "Clipboard manager",
-        group = "Actions"
+        group = "Действия"
     }}, {{env.mod, "Control"}, "r", awesome.restart, {
-        description = "Reload WM",
-        group = "Actions"
+        description = "Перезагрузить Оконный Менеджер",
+        group = "Действия"
     }}, {{env.mod}, "l", focus_switch_byd("right"), {
         description = "Go to right client",
         group = "Client focus"

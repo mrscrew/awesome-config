@@ -69,9 +69,9 @@ end
 local function build_fake_keys(keys)
 	local res = {}
 	for _, keygroup in ipairs({
-		{ description = "Undo last key",       group = "Action", keyname = "stepback" },
-		{ description = "Undo sequence",       group = "Action", keyname = "close" },
-		{ description = "Show hotkeys helper", group = "Action", keyname = "help" },
+		{ description = "Отменить последнюю клавишу",            group = "Действие", keyname = "stepback" },
+		{ description = "Отменить последовательность",       	 group = "Действие", keyname = "close" },
+		{ description = "Показать помощник по горячим клавишам", group = "Действие", keyname = "help" },
 	})
 	do
 		for _, k in ipairs(keys[keygroup.keyname]) do
