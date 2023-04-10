@@ -748,6 +748,22 @@ function system.pformatted.cpu(crit)
 	end
 end
 
+-- Net upload usage formatted special for panel widget
+--------------------------------------------------------------------------------
+function system.pformatted.net_up(interface)
+	interface = interface or "eth0"
+	local storage = {}
+
+	return function()
+		local usage = system.net_speed(interface, storage).up
+		return {
+			value = usage or 0,
+			text  = "b",
+			alert = false
+		}
+	end
+end
+
 -- Memory usage formatted special for panel widget
 --------------------------------------------------------------------------------
 function system.pformatted.mem(crit)

@@ -165,8 +165,9 @@ sysmon.widget.network = redflat.widget.net({
     interface = "wlo1", speed = {up = 6 * 1024 ^ 2, down = 6 * 1024 ^ 2}, autoscale = false
 }, {timeout = 2, widget = redflat.gauge.icon.double})
 
---sysmon.widget.net = redflat.widget.sysmon({func = redflat.system.},
---{timeout = 2, widget = redflat.gauge.monitor.circle})
+
+sysmon.widget.net_up = redflat.widget.sysmon({func = redflat.system.pformatted.net_up("wlo1")},
+                                             {timeout = 2, widget = redflat.gauge.monitor.circle})
 
 -- CPU usage
 sysmon.widget.cpu = redflat.widget.sysmon({func = redflat.system.pformatted.cpu(80)},
