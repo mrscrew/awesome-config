@@ -751,14 +751,14 @@ end
 -- Net upload usage formatted special for panel widget
 --------------------------------------------------------------------------------
 function system.pformatted.net_up(interface)
-	interface = interface or "eth0"
+	interface = interface or "wlo1"
 	local storage = {}
 
 	return function()
-		local usage = system.net_speed(interface, storage).up
+		local state = system.net_speed(interface, storage)
 		return {
-			value = usage or 0,
-			text  = "b",
+			value = state[1] or 0,
+			text  = state[1] .. " b",
 			alert = false
 		}
 	end
