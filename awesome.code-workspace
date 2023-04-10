@@ -11,6 +11,23 @@
 		],
 		"Lua.workspace.userThirdParty": [
 			"/usr/share/awesome/lib"
-		]
+		],
+		"luahelper.format.keep_simple_control_block_one_line": true,
+		"luahelper.format.break_after_table_lb": true,
+		"luahelper.format.break_before_table_rb": true,
+		"luahelper.format.chop_down_table": false,
+		"luahelper.format.chop_down_parameter": true,
+		"luahelper.format.keep_simple_function_one_line": true,
+		"luahelper.format.chop_down_kv_table": false,
+		"luahelper.format.extra_sep_at_table_end": false,
+		"luahelper.base.formatErrShow": true,
+		"luahelper.format.align_args": true,
+		"luahelper.format.align_parameter": true,
+		"luahelper.format.column_limit": 130,
+		"luahelper.Warn.CheckAfterDefine": true,
+		"luahelper.Warn.CheckNoUseAssign": true,
+		"luahelper.Warn.CheckLocalNoUse": true,
+		"luahelper.format.align_table_field": true,
+		"luahelper.format.break_before_functiondef_rp": false
 	}
 }

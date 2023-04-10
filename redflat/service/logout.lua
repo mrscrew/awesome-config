@@ -94,31 +94,31 @@ logout.entries = {
 	{   -- Logout
 		callback   = function() awesome.quit() end,
 		icon_name  = 'logout',
-		label      = 'Logout',
+		label      = 'Выход',
 		close_apps = true,
 	},
 	{   -- Lock screen
 		callback   = function() awful.spawn.with_shell("sleep 0.5 && xscreensaver-command -l") end,
 		icon_name  = 'lock',
-		label      = 'Lock',
+		label      = 'Заблокировать',
 		close_apps = false,
 	},
 	{   -- Shutdown
 		callback   = function() awful.spawn.with_shell("systemctl poweroff") end,
 		icon_name  = 'poweroff',
-		label      = 'Shutdown',
+		label      = 'Выключить',
 		close_apps = true,
 	},
 	{   -- Suspend
 		callback   = function() awful.spawn.with_shell("systemctl suspend") end,
 		icon_name  = 'suspend',
-		label      = 'Sleep',
+		label      = 'Ждущий режим',
 		close_apps = false,
 	},
 	{   -- Reboot
 		callback   = function() awful.spawn.with_shell("systemctl reboot") end,
 		icon_name  = 'reboot',
-		label      = 'Restart',
+		label      = 'Перезагрузка',
 		close_apps = true,
 	},
 }
@@ -163,27 +163,27 @@ end
 logout.keys = {
 	{
 		{ }, "Escape", logout.action.hide,
-		{ description = "Close the logout screen", group = "Action" }
+		{ description = "Закрыть экран выхода", group = "Действие" }
 	},
 	{
 		{ "Mod4" }, "Left", logout.action.select_prev,
-		{ description = "Select previous option", group = "Selection" }
+		{ description = "Выбрать предыдущий элемент", group = "Действие" }
 	},
 	{
 		{ "Mod4" }, "Right", logout.action.select_next,
-		{ description = "Select next option", group = "Selection" }
+		{ description = "Выберите следующий элемент", group = "Действие" }
 	},
 	{
 		{ }, "Return", logout.action.execute_selected,
-		{ description = "Execute selected option", group = "Action" }
+		{ description = "Запуск выбранного элемента", group = "Действие" }
 	},
 	{
 		{ "Mod4" }, "F1", function() redtip:show() end,
-		{ description = "Show hotkeys helper", group = "Action" }
+		{ description = "Показать помощник по горячим клавишам", group = "Действие" }
 	},
 	{ -- fake keys for redtip
 		{ }, "1..9", nil,
-		{ description = "Select option by number", group = "Selection",
+		{ description = "Выберите элемент по номеру", group = "Выбор",
 		  keyset = { "1", "2", "3", "4", "5", "6", "7", "8", "9" } }
 	}
 }
@@ -334,7 +334,7 @@ function logout:init()
 	------------------------------------------------------------
 	local countdown = {}
 	-- Should this pattern be moved to theme variables?
-	countdown.pattern = '<span color="%s">%s</span> in %s... Closing apps (%s left).'
+	countdown.pattern = '<span color="%s">%s</span> in %s... Закрытие приложений (%s left).'
 
 	countdown.timer = gears.timer({
 		timeout = 1,
@@ -397,7 +397,7 @@ function logout:show()
 	self.wibox.visible = true
 	self.selected = nil
 
-	redtip:set_pack("Logout screen", self.keys, self.style.keytip.column, self.style.keytip.geometry)
+	redtip:set_pack("Выход из системы", self.keys, self.style.keytip.column, self.style.keytip.geometry)
 	awful.keygrabber.run(self.keygrabber)
 end
 

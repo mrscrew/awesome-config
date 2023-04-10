@@ -29,7 +29,7 @@ function desktop:init(args)
 
 	-- Setting and placement
 	--------------------------------------------------------------------------------
-	local gap = { x = { 680, 120 }, y = { 120, 80 } }
+	local gap = { x = { 680, 60 }, y = { 60, 80 } }
 	local geometry = {
 		width  = workarea.width  - (gap.x[1] + gap.x[2]), x = workarea.x + gap.x[1],
 		height = workarea.height - (gap.y[1] + gap.y[2]), y = workarea.y + gap.y[1],
@@ -121,7 +121,7 @@ function desktop:init(args)
 	-- CPU and memory usage
 	--------------------------------------------------------------------------------
 	local cpu_storage = { cpu_total = {}, cpu_active = {} }
-	local cpuset = { blocks = { {}, {} }, height = 200 }
+	local cpuset = { blocks = { {}, {} }, height = 150 }
 	cpuset.unit = { { "MB", - 1 }, { "GB", 1024 } }
 
 	local cpu_sentences = {
@@ -129,13 +129,13 @@ function desktop:init(args)
 		" %s процентов ЦП. ",
 		"Более подробно %s из %s доступных ядер полностью загружены ",
 		"и %s %s используется наполовину. ",
-		-- "Furthermore %s %s used by more than ten percent.",
+		"Furthermore %s %s used by more than ten percent.",
 	}
 
 	local cpu_intro = {}
-	cpu_intro[11] = "Ваша система использует всего"
-	cpu_intro[50] = "Ваша система использует"
-	cpu_intro[100] = "Внимание! Ваша система использует"
+	cpu_intro[11] = "	Ваша система использует всего"
+	cpu_intro[50] = "	Ваша система использует"
+	cpu_intro[100] = "	Внимание! Ваша система использует"
 
 	-- cpu meter function
 	cpuset.blocks[1].timeout = 5
@@ -154,7 +154,7 @@ function desktop:init(args)
 			{ form_value(usage.total, colset.light, {}) },
 			{ form_value(core_load.full, colset.cores), #usage.core },
 			{ form_value(core_load.half, colset.cores, { "не одно" }), core_load.half > 1 and "are" or "не" },
-			-- { form_value(core_load.low), core_load.low > 1 and "cores are" or "core is" },
+			{ form_value(core_load.low), core_load.low > 1 and "cores are" or "core is" },
 		}
 
 		return form_text(cpu_sentences, values)
@@ -162,15 +162,15 @@ function desktop:init(args)
 
 	-- memory meter function
 	local mem_states = {}
-	mem_states[10] = "less than a tenth of the total."
-	mem_states[25] = "less than a quarter of total."
-	mem_states[50] = "less then half of total."
-	mem_states[75] = "more then half of total."
-	mem_states[100] = "very close to limit."
+	mem_states[10] = "меньше десятой части всего обьема."
+	mem_states[25] = "меньше четверти всего обьема."
+	mem_states[50] = "меньше половины всего обьема."
+	mem_states[75] = "больше половины всего обьема."
+	mem_states[100] = "очень близко к пределу."
 
 	local mem_sentences = {
-		" Meanwhile memory usage %s and that is %s",
-		" As for the swap space %s is used now.",
+		" Тем временем использование памяти состовляет %s, и это %s",
+		" Что касается пространства подкачки, то сейчас используется %s.",
 	}
 
 	cpuset.blocks[2].timeout = 10
@@ -179,7 +179,7 @@ function desktop:init(args)
 
 		local values = {
 			{ form_value(mem.inuse, colset.light, nil, cpuset.unit), form_value(mem.usep, {}, mem_states) },
-			{ form_value(mem.swp.inuse, colset.light, { "not a single byte" }, mem.swp.inuse > 0 and cpuset.unit or nil) },
+			{ form_value(mem.swp.inuse, colset.light, { "ни одного байта" }, mem.swp.inuse > 0 and cpuset.unit or nil) },
 		}
 
 		return form_text(mem_sentences, values)
@@ -187,17 +187,17 @@ function desktop:init(args)
 
 	-- Disks
 	--------------------------------------------------------------------------------
-	local diskset = { blocks = { { timeout = 60 } }, height = 280 }
+	local diskset = { blocks = { { timeout = 60 } }, height = 150 }
 	diskset.unit = { { "KB", 1 }, { "MB", 1024^1 }, { "GB", 1024^2 } }
 
 	local disks_points = { "/", "/home", "/mnt/storage", "/mnt/media" }
 	local disk_sentences = {
-		"Turning to the topic of drives %s of data was found on your system partition " ..
-				"and %s%s percent of disk space remain free.",
-		" Home partition filled with %s and %s percent of it is still free.",
-		" Also separate partition was allocated for opt directory" ..
-				" where %s used which is approximately %s percent of total,",
-		" and for media subdir of mnt where %s used which is %s percent.",
+		"	Переходя к теме дисков, в системном разделе найдено %s данных," ..
+				" ыи %s%s процентов дискового пространства остаются свободными.",
+		" Домашний раздел использует %s, и %s процента все еще свободны.",
+		" Также был выделен отдельный раздел для каталога opt" ..
+				" где используется %s, что составляет примерно %s процентов от общего числа,",
+		" и для медиа-подкаталога mnt, где используется %s, что составляет %s процентов.",
 	}
 
 	-- disk usage meter function
@@ -210,7 +210,7 @@ function desktop:init(args)
 		local values = {
 			{
 				form_value(data[1][2], colset.light, {}, diskset.unit),
-				data[1][1] > 50 and "only " or "",
+				data[1][1] > 50 and "только " or "",
 				form_value(100 - data[1][1], colset.diskpf)
 			},
 			{ form_value(data[2][2], colset.light, {}, diskset.unit), form_value(100 - data[2][1], colset.diskpf) },
@@ -235,7 +235,7 @@ function desktop:init(args)
 
 	-- Temperature indicator
 	--------------------------------------------------------------------------------
-	local hardwareset = { blocks = { {}, {}, {}, {} }, height = 240 }
+	local hardwareset = { blocks = { {}, {}, {}, {} }, height = 200 }
 	hardwareset.unit = { { "KBps", -1 }, { "MBps", 2048 } }
 
 	-- temperature cpu
@@ -243,53 +243,54 @@ function desktop:init(args)
 	hardwareset.blocks[1].action = function()
 		local data = system.lmsensors.get("cpu")
 		local value = form_value(data[1], colset.tcpu, {})
-		return string.format("According to the sensor readings CPU temperature of %s degrees Celsius", value)
+		return string.format("	По показаниям датчика, температура процессора состовляет %s градусов Цельсия,", value)
 	end
 
 	-- temperature hdd
-	local hdd_smart_check = system.simple_async("smartctl --attributes /dev/sda", "194.+%s(%d+)%s%(.+%)\r?\n")
+	local ssd_smart_check = system.simple_async("smartctl --attributes /dev/sda", "194.+%s(%d+)%s%(.+%)\r?\n")
+	local hdd_smart_check = system.simple_async("smartctl --attributes /dev/sdb", "194.+%s(%d+)%s%(.+%)\r?\n")
 
 	hardwareset.blocks[2].async = hdd_smart_check
 	hardwareset.blocks[2].action = function(data)
 		local value = form_value(data[1], colset.thdd, {})
-		return string.format(" and hard disk drive of %s degrees.", value)
+		return string.format(" а жесткого диска %s градусов.", value)
 	end
 
 	-- temperature nvidia
 	hardwareset.blocks[3].async = system.thermal.nvoptimus
 	hardwareset.blocks[3].action = function(data)
-		local value = data.off and "is currently disabled" or
-		              string.format("has temperature of %s degrees", form_value(data[1], colset.tgpu, {}))
+		local value = data.off and "в настоящее время отключена" or
+		              string.format("имеет температуру %s градусов", form_value(data[1], colset.tgpu, {}))
 
-		return string.format(" Discrete graphics card %s.", value)
+		return string.format(" Дискретная видеокарта %s.", value)
 	end
 
 	-- disks i/o speed
 	local speed_storage = { {}, {} }
 	local speed_sentences = {
-		" Seems like system solid disk drive %s%s.",
-		" In its turn media hard disk drive %s%s.",
+		" Похоже что системный, твердотельный, диск, %s%s.",
+		" В свою очередь жесткий диск носителя %s%s.",
 	}
 
-	local rs_txt = recolor("read speed ", style.color.icon)
-	local ws_txt = recolor(" write speed ", style.color.icon)
+	local rs_txt = recolor("скорость чтения ", style.color.icon)
+	local ws_txt = recolor(" скорость записи ", style.color.icon)
 
-	local no_act_txt = { "shows no signs of even minimal activity lately", "shows no signs of activity" }
+	local no_act_txt = { "в последнее время, не проявляет признаков, даже минимальной, активности", "не проявляет признаков активности" }
 
 	hardwareset.blocks[4].action = function()
 		local data = {}
-		data[1] = system.disk_speed("nvme0n1", speed_storage[1])
-		data[2] = system.disk_speed("sda", speed_storage[2])
+		data[1] = system.disk_speed("sda", speed_storage[1])
+		data[2] = system.disk_speed("sdb", speed_storage[2])
 
 		local values = {}
 		for i, set in ipairs({colset.sspeed, colset.hspeed}) do
 			if data[i][1] > 1 or data[i][2] > 1 then
 				values[i] = {
-					rs_txt .. form_value(data[i][1], set, {}, hardwareset.unit) .. " and",
+					rs_txt .. form_value(data[i][1], set, {}, hardwareset.unit) .. " и",
 					ws_txt .. form_value(data[i][2], colset.sspeed, {}, hardwareset.unit)
 				}
 			else
-				values[i] = { no_act_txt[i], (i == 2 and values[1][2] == "") and " either" or "" }
+				values[i] = { no_act_txt[i], (i == 2 and values[1][2] == "") and " или" or "" }
 			end
 		end
 

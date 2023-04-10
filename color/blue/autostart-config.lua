@@ -30,7 +30,7 @@ function autostart.run()
 	awful.spawn.with_shell("nm-applet")
 	awful.spawn.with_shell("blueberry-tray")
 
-	awful.spawn.with_shell("nitrogen --restore") -- 
+	awful.spawn.with_shell("variety") -- Обои рабочего стола
 	-- awful.spawn.with_shell("conky -c $HOME/.config/awesome/system-overview.conkyrc")
 
 	-- apps

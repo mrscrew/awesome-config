@@ -80,43 +80,43 @@ local STATE = setmetatable(
 )
 
 local tips = {}
-tips[STATE.NORMAL] = "regular notifications"
-tips[STATE.DAILY]  = "postponed for a day"
-tips[STATE.WEEKLY] = "postponed for a week"
-tips[STATE.SILENT] = "notifications disabled"
+tips[STATE.NORMAL] = "Регулярные уведомления"
+tips[STATE.DAILY]  = "Отложить на сутки"
+tips[STATE.WEEKLY] = "Отложить на неделю"
+tips[STATE.SILENT] = "Отключить уведомления"
 
 -- key bindings
 updates.keys = {}
 updates.keys.control = {
 	{
 		{}, "1", function() updates.set_mode(STATE.NORMAL) end,
-		{ description = "Regular notifications", group = "Notifications" }
+		{ description = "Регулярные уведомления", group = "Уведомления" }
 	},
 	{
 		{}, "2", function() updates.set_mode(STATE.DAILY) end,
-		{ description = "Postponed for a day", group = "Notifications" }
+		{ description = "Отложить на сутки", group = "Уведомления" }
 	},
 	{
 		{}, "3", function() updates.set_mode(STATE.WEEKLY) end,
-		{ description = "Postponed for a week", group = "Notifications" }
+		{ description = "Отложить на неделю", group = "Уведомления" }
 	},
 	{
 		{}, "4", function() updates.set_mode(STATE.SILENT) end,
-		{ description = "Notifications disabled", group = "Notifications" }
+		{ description = "Отключить уведомления", group = "Уведомления" }
 	},
 }
 updates.keys.action = {
 	{
 		{}, "u", function() updates:update(true) end,
-		{ description = "Check updates", group = "Action" }
+		{ description = "Проверить обновления", group = "Действие" }
 	},
 	{
 		{}, "Escape", function() updates:hide() end,
-		{ description = "Close updates widget", group = "Action" }
+		{ description = "Закрыть виджет", group = "Действие" }
 	},
 	{
 		{ "Mod4" }, "F1", function() redtip:show() end,
-		{ description = "Show hotkeys helper", group = "Action" }
+		{ description = "Показать помощник по горячим клавишам", group = "Действие" }
 	},
 }
 
@@ -159,7 +159,7 @@ function updates:init(args, style)
 	self.packbox = svgbox(style.wibox.icon.package, nil, style.color.icon)
 
 	-- titlebar
-	self.titlebox = wibox.widget.textbox("0 UPDATES")
+	self.titlebox = wibox.widget.textbox("0 Обновлений")
 	self.titlebox:set_font(style.wibox.title_font)
 	self.titlebox:set_align("center")
 
@@ -290,12 +290,12 @@ function updates:init(args, style)
 		local is_alert = check_alert()
 
 		if style.need_notify and (is_alert or force_notify) then
-			rednotify:show(redutil.table.merge({ text = c .. " updates available" }, style.notify))
+			rednotify:show(redutil.table.merge({ text = c .. " доступных обновлений" }, style.notify))
 		end
-		self.titlebox:set_text(c .. " UPDATES")
+		self.titlebox:set_text(c .. " ОБНОВЛЕНИЙ")
 		self.packbox:set_color(tonumber(c) > 0  and style.color.main or style.color.icon)
 
-		if self.tp then self.tp:set_text(c .. " updates") end
+		if self.tp then self.tp:set_text(c .. " обновлений") end
 		update_widget_colors()
 	end
 
@@ -350,7 +350,7 @@ function updates:show()
 
 	self.wibox.visible = true
 	awful.keygrabber.run(self.keygrabber)
-	redtip:set_pack("System updates", self.tip, self.style.keytip.column, self.style.keytip.geometry)
+	redtip:set_pack("Системные обновления", self.tip, self.style.keytip.column, self.style.keytip.geometry)
 end
 
 function updates:hide()

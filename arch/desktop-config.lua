@@ -30,168 +30,73 @@ function desktop:init(args)
 
     -- Network speed
     --------------------------------------------------------------------------------
-    local netspeed = {
-        geometry = wgeometry(grid, places.netspeed, workarea)
-    }
+    local netspeed = {geometry = wgeometry(grid, places.netspeed, workarea)}
 
     netspeed.args = {
-        interface = "wlo1",
-        maxspeed = {
-            up = 6 * 1024 ^ 2,
-            down = 6 * 1024 ^ 2
-        },
-        crit = {
-            up = 6 * 1024 ^ 2,
-            down = 6 * 1024 ^ 2
-        },
-        timeout = 2,
-        autoscale = false,
-        label = "NET"
+        interface = "wlo1", maxspeed = {up = 6 * 1024 ^ 2, down = 6 * 1024 ^ 2}, crit = {up = 6 * 1024 ^ 2, down = 6 * 1024 ^ 2},
+        timeout = 2, autoscale = false, label = "NET"
     }
 
     netspeed.style = beautiful.individual.desktop.speedmeter.net
 
     -- SSD speed
     --------------------------------------------------------------------------------
-    local ssdspeed = {
-        geometry = wgeometry(grid, places.ssdspeed, workarea)
-    }
+    local ssdspeed = {geometry = wgeometry(grid, places.ssdspeed, workarea)}
 
-    ssdspeed.args = {
-        interface = "sda",
-        meter_function = system.disk_speed,
-        timeout = 2,
-        label = "SSD"
-    }
+    ssdspeed.args = {interface = "sda", meter_function = system.disk_speed, timeout = 2, label = "SSD"}
 
     ssdspeed.style = beautiful.individual.desktop.speedmeter.drive
 
     -- HDD speed
     --------------------------------------------------------------------------------
-    local hddspeed = {
-        geometry = wgeometry(grid, places.hddspeed, workarea)
-    }
+    local hddspeed = {geometry = wgeometry(grid, places.hddspeed, workarea)}
 
-    hddspeed.args = {
-        interface = "sdb",
-        meter_function = system.disk_speed,
-        timeout = 2,
-        label = "HDD"
-    }
+    hddspeed.args = {interface = "sdb", meter_function = system.disk_speed, timeout = 2, label = "HDD"}
 
     hddspeed.style = beautiful.individual.desktop.speedmeter.drive
 
     -- CPU and memory usage
     --------------------------------------------------------------------------------
-    local cpu_storage = {
-        cpu_total = {},
-        cpu_active = {}
-    }
-    local cpumem = {
-        geometry = wgeometry(grid, places.cpumem, workarea)
-    }
+    local cpu_storage = {cpu_total = {}, cpu_active = {}}
+    local cpumem = {geometry = wgeometry(grid, places.cpumem, workarea)}
 
     cpumem.args = {
-        topbars = {
-            num = 4,
-            maxm = 100,
-            crit = 90
-        },
-        lines = {{
-            maxm = 100,
-            crit = 80
-        }, {
-            maxm = 100,
-            crit = 80
-        }},
-        meter = {
-            args = cpu_storage,
-            func = system.dformatted.cpumem
-        },
-        timeout = 2
+        topbars = {num = 4, maxm = 100, crit = 90}, lines = {{maxm = 100, crit = 80}, {maxm = 100, crit = 80}},
+        meter = {args = cpu_storage, func = system.dformatted.cpumem}, timeout = 2
     }
 
     cpumem.style = beautiful.individual.desktop.multimeter.cpumem
 
     -- Transmission info
     --------------------------------------------------------------------------------
-    local transm = {
-        geometry = wgeometry(grid, places.transm, workarea)
-    }
+    local transm = {geometry = wgeometry(grid, places.transm, workarea)}
 
     transm.args = {
-        topbars = {
-            num = 8,
-            maxm = 100
-        },
-        lines = {{
-            maxm = 6 * 1024
-        }, {
-            maxm = 6 * 1024
-        }},
-        meter = {
-            async = system.transmission.info,
-            args = {
-                speed_only = true
-            }
-        },
-        timeout = 5
+        topbars = {num = 8, maxm = 100}, lines = {{maxm = 6 * 1024}, {maxm = 6 * 1024}},
+        meter = {async = system.transmission.info, args = {speed_only = true}}, timeout = 5
     }
 
     transm.style = beautiful.individual.desktop.multimeter.transmission
 
     -- Disks
     --------------------------------------------------------------------------------
-    local disks = {
-        geometry = wgeometry(grid, places.disks, workarea)
-    }
+    local disks = {geometry = wgeometry(grid, places.disks, workarea)}
     disks.args = {
-        sensors = {{
-            meter_function = system.fs_info,
-            maxm = 100,
-            crit = 80,
-            name = "root",
-            args = "/"
-        }, {
-            meter_function = system.fs_info,
-            maxm = 100,
-            crit = 80,
-            name = "home",
-            args = "/home"
-        }, {
-            meter_function = system.fs_info,
-            maxm = 100,
-            crit = 80,
-            name = "misc",
-            args = "/mnt/storage"
-        }, {
-            meter_function = system.fs_info,
-            maxm = 100,
-            crit = 80,
-            name = "data",
-            args = "/mnt/media"
-        }},
-        timeout = 300
+        sensors = {
+            {meter_function = system.fs_info, maxm = 100, crit = 80, name = "root", args = "/"},
+            {meter_function = system.fs_info, maxm = 100, crit = 80, name = "home", args = "/home"},
+            {meter_function = system.fs_info, maxm = 100, crit = 80, name = "misc", args = "/mnt/storage"},
+            {meter_function = system.fs_info, maxm = 100, crit = 80, name = "data", args = "/mnt/media"}
+        }, timeout = 300
     }
 
     disks.style = beautiful.individual.desktop.multiline.disks
 
     -- Cores
     --------------------------------------------------------------------------------`
-    local cores = {
-        geometry = wgeometry(grid, places.cores, workarea)
-    }
+    local cores = {geometry = wgeometry(grid, places.cores, workarea)}
     local cv = system.dformatted.cpu("")
-    cores.args = {
-        sensors = {{
-            meter_function = cv,
-            maxm = 100,
-            crit = 80,
-            name = "core",
-            args = ""
-        }},
-        timeout = 2
-    }
+    cores.args = {sensors = {{meter_function = cv, maxm = 100, crit = 80, name = "core", args = ""}}, timeout = 2}
     cores.style = beautiful.individual.desktop.multiline.cores
 
     -- Sensors parser setup
@@ -199,42 +104,23 @@ function desktop:init(args)
     local sensors_base_timeout = 5
 
     system.lmsensors.delay = 2
-    system.lmsensors.patterns = {
-        cpu = {
-            match = "CPU:%s+%+(%d+)%.%d°[CF]"
-        }
-    }
+    system.lmsensors.patterns = {cpu = {match = "CPU:%s+%+(%d+)%.%d°[CF]"}}
 
     -- start auto async lmsensors check
     system.lmsensors:soft_start(sensors_base_timeout)
 
     -- Temperature indicator
     --------------------------------------------------------------------------------
-    local thermal = {
-        geometry = wgeometry(grid, places.thermal, workarea)
-    }
+    local thermal = {geometry = wgeometry(grid, places.thermal, workarea)}
 
     local hdd_smart_check = system.simple_async("smartctl --attributes /dev/sda", "194.+%s(%d+)%s%(.+%)\r?\n")
 
     thermal.args = {
-        sensors = {{
-            meter_function = system.lmsensors.get,
-            args = "cpu",
-            maxm = 100,
-            crit = 75,
-            name = "cpu"
-        }, {
-            async_function = hdd_smart_check,
-            maxm = 60,
-            crit = 45,
-            name = "hdd"
-        }, {
-            async_function = system.thermal.nvoptimus,
-            maxm = 105,
-            crit = 80,
-            name = "gpu"
-        }},
-        timeout = sensors_base_timeout
+        sensors = {
+            {meter_function = system.lmsensors.get, args = "cpu", maxm = 100, crit = 75, name = "cpu"},
+            {async_function = hdd_smart_check, maxm = 60, crit = 45, name = "hdd"},
+            {async_function = system.thermal.nvoptimus, maxm = 105, crit = 80, name = "gpu"}
+        }, timeout = sensors_base_timeout
     }
 
     thermal.style = beautiful.individual.desktop.singleline.thermal

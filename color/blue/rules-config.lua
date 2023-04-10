@@ -74,6 +74,11 @@ function rules:init(args)
 			rule_any   = { type = { "normal" }},
 			properties = { placement = awful.placement.no_overlap + awful.placement.no_offscreen }
 		},
+		-- Диалоги в центр экрана
+		{
+			rule_any   = { type = { "dialog" }},
+			properties = { placement = awful.placement.centered }
+		},
 
 		-- Tags placement
 		{

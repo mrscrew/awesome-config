@@ -8,31 +8,31 @@ function logout:init()
 	{   -- Logout
 		callback   = function() awesome.quit() end,
 		icon_name  = 'logout',
-		label      = 'Logout',
+		label      = 'Выход',
 		close_apps = true,
 	},
 	{   -- Shutdown
 		callback   = function() awful.spawn.with_shell("systemctl poweroff") end,
 		icon_name  = 'poweroff',
-		label      = 'Shutdown',
+		label      = 'Выключение',
 		close_apps = true,
 	},
 	{   -- Reboot
 		callback   = function() awful.spawn.with_shell("systemctl reboot") end,
 		icon_name  = 'reboot',
-		label      = 'Restart',
+		label      = 'Перезагрузка',
 		close_apps = true,
 	},
 	{   -- Switch user
 		callback   = function() awful.spawn.with_shell("dm-tool switch-to-greeter") end,
 		icon_name  = 'switch',
-		label      = 'Switch User',
+		label      = 'Сменить Пользователя',
 		close_apps = false,
 	},
 	{   -- Suspend
 		callback   = function() awful.spawn.with_shell("systemctl suspend") end,
 		icon_name  = 'suspend',
-		label      = 'Sleep',
+		label      = 'Режим Ожидания',
 		close_apps = false,
 	},
     }
