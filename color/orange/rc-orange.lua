@@ -216,8 +216,11 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.align.horizontal, expand = "outside", nil, env.wrapper(tasklist[s], "tasklist")
         }, { -- right widgets
             layout = wibox.layout.fixed.horizontal, separator, env.wrapper(kbindicator.widget, "keyboard", kbindicator.buttons),
-            separator, env.wrapper(mail.widget, "mail", mail.buttons), separator, env.wrapper(sysmon.widget.network, "network"),
-            separator, env.wrapper(sysmon.widget.cpu, "cpu", sysmon.buttons.cpu),
+            separator,
+            env.wrapper(mail.widget, "mail", mail.buttons), separator, env.wrapper(sysmon.widget.network, "network"),
+            separator,
+            env.wrapper(sysmon.widget.net_up, "net_up"),
+            env.wrapper(sysmon.widget.cpu, "cpu", sysmon.buttons.cpu),
             env.wrapper(sysmon.widget.ram, "ram", sysmon.buttons.ram), env.wrapper(sysmon.widget.battery, "battery"), separator,
             env.wrapper(volume.widget, "volume", volume.buttons), separator,
             env.wrapper(updates.widget, "updates", updates.buttons), separator,
