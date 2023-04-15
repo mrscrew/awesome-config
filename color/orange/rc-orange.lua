@@ -106,7 +106,6 @@ end), awful.button({}, 4, function() awful.layout.inc(1) end), awful.button({}, 
 --------------------------------------------------------------------------------
 local tray = {}
 tray.widget = redflat.widget.minitray()
-
 tray.buttons = awful.util.table.join(awful.button({}, 1, function() redflat.widget.minitray:toggle() end))
 
 -- PA volume control
@@ -169,6 +168,9 @@ sysmon.widget.network = redflat.widget.net({
 sysmon.widget.net_up = redflat.widget.sysmon({func = redflat.system.pformatted.net_up("wlo1")},
                                              {timeout = 2, widget = redflat.gauge.monitor.circle})
 
+sysmon.widget.net_down = redflat.widget.sysmon({func = redflat.system.pformatted.net_down("wlo1")},
+                                               {timeout = 2, widget = redflat.gauge.monitor.circle})
+
 -- CPU usage
 sysmon.widget.cpu = redflat.widget.sysmon({func = redflat.system.pformatted.cpu(80)},
                                           {timeout = 2, widget = redflat.gauge.monitor.circle})
@@ -209,7 +211,7 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- add widgets to the wibox
     s.panel:setup{
-        layout = wibox.layout.align.horizontal, { -- left widgets
+            layout = wibox.layout.align.horizontal, { -- left widgets
             layout = wibox.layout.fixed.horizontal, env.wrapper(layoutbox[s], "layoutbox", layoutbox.buttons), separator,
             env.wrapper(taglist[s], "taglist"), separator
         }, { -- middle widget
@@ -219,6 +221,7 @@ awful.screen.connect_for_each_screen(function(s)
             separator,
             env.wrapper(mail.widget, "mail", mail.buttons), separator, env.wrapper(sysmon.widget.network, "network"),
             separator,
+            env.wrapper(sysmon.widget.net_down, "net_down"),
             env.wrapper(sysmon.widget.net_up, "net_up"),
             env.wrapper(sysmon.widget.cpu, "cpu", sysmon.buttons.cpu),
             env.wrapper(sysmon.widget.ram, "ram", sysmon.buttons.ram), env.wrapper(sysmon.widget.battery, "battery"), separator,

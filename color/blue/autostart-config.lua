@@ -26,11 +26,15 @@ function autostart.run()
 	awful.spawn.with_shell("python ~/scripts/firefox/ff-sync.py")
 
 	-- utils
-	awful.spawn.with_shell("picom -b --config  $HOME/.config/awesome/picom.conf")
-	awful.spawn.with_shell("nm-applet")
-	awful.spawn.with_shell("blueberry-tray")
-
 	awful.spawn.with_shell("variety") -- Обои рабочего стола
+	awful.spawn.with_shell("nm-applet")
+	awful.spawn.with_shell("pamac-tray")
+	awful.spawn.with_shell("xfce4-power-manager")
+	awful.spawn.with_shell("numlockx on")
+	awful.spawn.with_shell("blueberry-tray")
+	awful.spawn.with_shell("numlockx on")
+	awful.spawn.with_shell("picom -b --config  $HOME/.config/awesome/picom.conf")
+	
 	-- awful.spawn.with_shell("conky -c $HOME/.config/awesome/system-overview.conkyrc")
 
 	-- apps

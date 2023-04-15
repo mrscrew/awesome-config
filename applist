@@ -1,9 +1,0 @@
-key=2;app=thunar;run=thunar ;icon=;
-key=1;app=yandex-browser;run=/opt/yandex/browser/yandex_browser ;icon=;
-key=4;app=;run=;icon=nil;
-key=3;app=code;run=/opt/visual-studio-code/code --unity-launch --enable-crashpad ;icon=;
-key=9;app=;run=;icon=nil;
-key=6;app=;run=;icon=nil;
-key=5;app=;run=;icon=nil;
-key=8;app=;run=;icon=nil;
-key=7;app=;run=;icon=nil;

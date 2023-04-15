@@ -753,12 +753,28 @@ end
 function system.pformatted.net_up(interface)
 	interface = interface or "wlo1"
 	local storage = {}
+	local unit = {{  "B", 1 }, { "KB", 1024 }, { "MB", 1024^2 }, { "GB", 1024^3 }}
 
 	return function()
 		local state = system.net_speed(interface, storage)
 		return {
-			value = state[1] or 0,
-			text  = state[1] .. " b",
+			value = state[1] / (6 * 1024 ^ 2) or 0,
+			text  = redutil.text.dformat(state[1], unit, 2, " "),
+			alert = false
+		}
+	end
+end
+
+function system.pformatted.net_down(interface)
+	interface = interface or "wlo1"
+	local storage = {}
+	local unit = {{  "B", 1 }, { "KB", 1024 }, { "MB", 1024^2 }, { "GB", 1024^3 }}
+
+	return function()
+		local state = system.net_speed(interface, storage)
+		return {
+			value = state[2] / (6 * 1024 ^ 2) or 0,
+			text  = redutil.text.dformat(state[2], unit, 2, " "),
 			alert = false
 		}
 	end

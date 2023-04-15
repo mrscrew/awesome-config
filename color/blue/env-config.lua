@@ -27,6 +27,8 @@ function env:init(args)
 	self.theme = args.theme or "red"
 	self.terminal = args.terminal or "urxvt"
 	self.mod = args.mod or "Mod4"
+	self.alt = args.alt or "Mod1"
+	self.altgr = args.altgr or "Mod5"
 	self.fm = args.fm or "thunar"
 	self.mail = args.mail or "thunderbird"
 	self.player = args.player or "vlc"
