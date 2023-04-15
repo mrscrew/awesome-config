@@ -738,6 +738,14 @@ function hotkeys:init(args)
                 group = "Основные"
             }
         }, {
+            {env.mod}, "b", function()
+                myscreen = awful.screen.focused()
+                myscreen.panel.visible = not myscreen.panel.visible
+            end, {
+                description = "Показать/Скрыть панель",
+                group = "Основные"
+            }
+        }, {
             {env.mod}, "c",
             function()
                 redflat.float.keychain:activate(keyseq, "User")

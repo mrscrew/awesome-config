@@ -633,8 +633,8 @@ function redtasklist.winmenu:init(style)
 	local menu_items = {
 		{ widget = classline },
 		menusep,
-		{ "Minimize",    minimize, nil, style.icon.minimize or style.icon.unknown },
-		{ "Close",       close,    nil, style.icon.close or style.icon.unknown },
+		{ "Свернуть", minimize, nil, style.icon.minimize or style.icon.unknown },
+		{ "Закрыть",  close,    nil, style.icon.close or style.icon.unknown },
 		menusep,
 		{ widget = stateline, focus = true }
 	}
@@ -655,13 +655,13 @@ function redtasklist.winmenu:init(style)
 		table.insert(menu_items, 3, menusep)
 		table.insert(menu_items, 3, { widget = tagline })
 	else
-		table.insert(menu_items, 3, { "Add to tag",  { items = addmenu_items,  theme = style.tagmenu } })
-		table.insert(menu_items, 3, { "Move to tag", { items = movemenu_items, theme = style.tagmenu } })
+		table.insert(menu_items, 3, { "Добавить в тег",    { items = addmenu_items,  theme = style.tagmenu } })
+		table.insert(menu_items, 3, { "Переместить в тег", { items = movemenu_items, theme = style.tagmenu } })
 	end
 
 	-- inject switch screen action into menu if applicable
 	if style.enable_screen_switch and screen.count() > 1 then
-		local action = { "Switch screen", switchscreen, nil, style.icon.switch_screen or style.icon.unknown }
+		local action = { "Переключить экран", switchscreen, nil, style.icon.switch_screen or style.icon.unknown }
 		if style.enable_tagline then table.insert(menu_items, 3, menusep) end
 		table.insert(menu_items, 3, action)
 	end

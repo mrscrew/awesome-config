@@ -56,32 +56,45 @@ local tasklist = {}
 -- load list of app name aliases from files and set it as part of tasklist theme
 tasklist.style = {appnames = require("color.blue.alias-config")}
 
-tasklist.buttons = awful.util.table.join(awful.button({}, 1, redflat.widget.tasklist.action.select),
-                                         awful.button({}, 2, redflat.widget.tasklist.action.close),
-                                         awful.button({}, 3, redflat.widget.tasklist.action.menu),
-                                         awful.button({}, 4, redflat.widget.tasklist.action.switch_next),
-                                         awful.button({}, 5, redflat.widget.tasklist.action.switch_prev))
+tasklist.buttons = awful.util.table.join(
+                       awful.button({}, 1, redflat.widget.tasklist.action.select),
+                       awful.button({}, 2, redflat.widget.tasklist.action.close),
+                       awful.button({}, 3, redflat.widget.tasklist.action.menu),
+                       awful.button({}, 4,
+                                    redflat.widget.tasklist.action.switch_next),
+                       awful.button({}, 5,
+                                    redflat.widget.tasklist.action.switch_prev))
 
 -- Taglist widget
 --------------------------------------------------------------------------------
 local taglist = {}
 taglist.style = {widget = redflat.gauge.tag.orange.new, show_tip = true}
-taglist.buttons = awful.util.table.join(awful.button({}, 1, function(t) t:view_only() end),
-                                        awful.button({env.mod}, 1,
-                                                     function(t) if client.focus then client.focus:move_to_tag(t) end end),
-                                        awful.button({}, 2, awful.tag.viewtoggle),
-                                        awful.button({}, 3, function(t) redflat.widget.layoutbox:toggle_menu(t) end),
-                                        awful.button({env.mod}, 3,
-                                                     function(t) if client.focus then client.focus:toggle_tag(t) end end),
-                                        awful.button({}, 4, function(t) awful.tag.viewnext(t.screen) end),
-                                        awful.button({}, 5, function(t) awful.tag.viewprev(t.screen) end))
+taglist.buttons = awful.util.table.join(awful.button({}, 1, function(t)
+    t:view_only()
+end), awful.button({env.mod}, 1, function(t)
+    if client.focus then client.focus:move_to_tag(t) end
+end), awful.button({}, 2, awful.tag.viewtoggle),
+                                        awful.button({}, 3, function(t)
+    redflat.widget.layoutbox:toggle_menu(t)
+end), awful.button({env.mod}, 3, function(t)
+    if client.focus then client.focus:toggle_tag(t) end
+end), awful.button({}, 4, function(t) awful.tag.viewnext(t.screen) end),
+                                        awful.button({}, 5, function(t)
+    awful.tag.viewprev(t.screen)
+end))
 
 -- Textclock widget
 --------------------------------------------------------------------------------
 local textclock = {}
-textclock.widget = redflat.widget.textclock({timeformat = "%H:%M", dateformat = "%b  %d  %a"})
+textclock.widget = redflat.widget.textclock({
+    timeformat = "%H:%M",
+    dateformat = "%b  %d  %a"
+})
 
-textclock.buttons = awful.util.table.join(awful.button({}, 1, function() redflat.float.calendar:show() end))
+textclock.buttons = awful.util.table.join(
+                        awful.button({}, 1, function()
+        redflat.float.calendar:show()
+    end))
 -- Software update indcator
 --------------------------------------------------------------------------------
 redflat.widget.updates:init({command = env.updates})
@@ -89,40 +102,55 @@ redflat.widget.updates:init({command = env.updates})
 local updates = {}
 updates.widget = redflat.widget.updates()
 
-updates.buttons = awful.util.table.join(awful.button({}, 1, function() awful.spawn.with_shell(env.update_manager) end),
-                                        awful.button({}, 2, function() redflat.widget.updates:update(true) end),
-                                        awful.button({}, 3, function() redflat.widget.updates:toggle() end))
+updates.buttons = awful.util.table.join(awful.button({}, 1, function()
+    awful.spawn.with_shell(env.update_manager)
+end), awful.button({}, 2, function() redflat.widget.updates:update(true) end),
+                                        awful.button({}, 3, function()
+    redflat.widget.updates:toggle()
+end))
 
 -- Layoutbox configure
 --------------------------------------------------------------------------------
 local layoutbox = {}
 
-layoutbox.buttons = awful.util.table.join(awful.button({}, 1, function() mymenu.mainmenu:toggle() end), awful.button({}, 3,
-                                                                                                                     function()
-    redflat.widget.layoutbox:toggle_menu(mouse.screen.selected_tag)
-end), awful.button({}, 4, function() awful.layout.inc(1) end), awful.button({}, 5, function() awful.layout.inc(-1) end))
+layoutbox.buttons = awful.util.table.join(
+                        awful.button({}, 1,
+                                     function() mymenu.mainmenu:toggle() end),
+                        awful.button({}, 3, function()
+        redflat.widget.layoutbox:toggle_menu(mouse.screen.selected_tag)
+    end), awful.button({}, 4, function() awful.layout.inc(1) end), awful.button(
+                            {}, 5, function() awful.layout.inc(-1) end))
 
 -- Tray widget
 --------------------------------------------------------------------------------
 local tray = {}
 tray.widget = redflat.widget.minitray()
-tray.buttons = awful.util.table.join(awful.button({}, 1, function() redflat.widget.minitray:toggle() end))
+tray.buttons = awful.util.table.join(awful.button({}, 1, function()
+    redflat.widget.minitray:toggle()
+end))
 
 -- PA volume control
 --------------------------------------------------------------------------------
 local volume = {}
-volume.widget = redflat.widget.pulse(nil, {widget = redflat.gauge.audio.blue.new})
+volume.widget = redflat.widget.pulse(nil,
+                                     {widget = redflat.gauge.audio.blue.new})
 
 -- activate player widget
 redflat.float.player:init({name = env.player})
 
-volume.buttons = awful.util.table.join(awful.button({}, 4, function() volume.widget:change_volume() end),
-                                       awful.button({}, 5, function() volume.widget:change_volume({down = true}) end),
-                                       awful.button({}, 2, function() volume.widget:mute() end),
-                                       awful.button({}, 3, function() redflat.float.player:show() end),
-                                       awful.button({}, 1, function() redflat.float.player:action("PlayPause") end),
-                                       awful.button({}, 8, function() redflat.float.player:action("Previous") end),
-                                       awful.button({}, 9, function() redflat.float.player:action("Next") end))
+volume.buttons = awful.util.table.join(awful.button({}, 4, function()
+    volume.widget:change_volume()
+end), awful.button({}, 5,
+                   function() volume.widget:change_volume({down = true}) end),
+                                       awful.button({}, 2, function()
+    volume.widget:mute()
+end), awful.button({}, 3, function() redflat.float.player:show() end),
+                                       awful.button({}, 1, function()
+    redflat.float.player:action("PlayPause")
+end),
+                                       awful.button({}, 8, function()
+    redflat.float.player:action("Previous")
+end), awful.button({}, 9, function() redflat.float.player:action("Next") end))
 
 -- Keyboard layout indicator
 --------------------------------------------------------------------------------
@@ -130,9 +158,13 @@ local kbindicator = {}
 redflat.widget.keyboard:init({"Английский", "Русский"})
 kbindicator.widget = redflat.widget.keyboard()
 
-kbindicator.buttons = awful.util.table.join(awful.button({}, 1, function() redflat.widget.keyboard:toggle_menu() end),
-                                            awful.button({}, 4, function() redflat.widget.keyboard:toggle() end),
-                                            awful.button({}, 5, function() redflat.widget.keyboard:toggle(true) end))
+kbindicator.buttons = awful.util.table.join(
+                          awful.button({}, 1, function()
+        redflat.widget.keyboard:toggle_menu()
+    end), awful.button({}, 4, function() redflat.widget.keyboard:toggle() end),
+                          awful.button({}, 5, function()
+        redflat.widget.keyboard:toggle(true)
+    end))
 
 -- Mail widget
 --------------------------------------------------------------------------------
@@ -148,40 +180,54 @@ redflat.widget.mail:init({maillist = my_mails})
 mail.widget = redflat.widget.mail()
 
 -- buttons
-mail.buttons = awful.util.table.join(awful.button({}, 1, function() awful.spawn.with_shell(env.mail) end),
-                                     awful.button({}, 2, function() redflat.widget.mail:update(true) end))
+mail.buttons = awful.util.table.join(awful.button({}, 1, function()
+    awful.spawn.with_shell(env.mail)
+end), awful.button({}, 2, function() redflat.widget.mail:update(true) end))
 
 -- System resource monitoring widgets
 --------------------------------------------------------------------------------
 local sysmon = {widget = {}, buttons = {}}
 
 -- battery
-sysmon.widget.battery = redflat.widget.sysmon({func = redflat.system.pformatted.bat(25), arg = "BAT0"},
-                                              {timeout = 60, widget = redflat.gauge.monitor.circle})
+sysmon.widget.battery = redflat.widget.sysmon({
+    func = redflat.system.pformatted.bat(25),
+    arg = "BAT0"
+}, {timeout = 60, widget = redflat.gauge.monitor.circle})
 
 -- network speed
 sysmon.widget.network = redflat.widget.net({
-    interface = "wlo1", speed = {up = 6 * 1024 ^ 2, down = 6 * 1024 ^ 2}, autoscale = false
+    interface = "wlo1",
+    speed = {up = 6 * 1024 ^ 2, down = 6 * 1024 ^ 2},
+    autoscale = false
 }, {timeout = 2, widget = redflat.gauge.icon.double})
 
+sysmon.widget.net_up = redflat.widget.sysmon({
+    func = redflat.system.pformatted.net_up("wlo1")
+}, {timeout = 2, widget = redflat.gauge.monitor.circle})
 
-sysmon.widget.net_up = redflat.widget.sysmon({func = redflat.system.pformatted.net_up("wlo1")},
-                                             {timeout = 2, widget = redflat.gauge.monitor.circle})
-
-sysmon.widget.net_down = redflat.widget.sysmon({func = redflat.system.pformatted.net_down("wlo1")},
-                                               {timeout = 2, widget = redflat.gauge.monitor.circle})
+sysmon.widget.net_down = redflat.widget.sysmon({
+    func = redflat.system.pformatted.net_down("wlo1")
+}, {timeout = 2, widget = redflat.gauge.monitor.circle})
 
 -- CPU usage
-sysmon.widget.cpu = redflat.widget.sysmon({func = redflat.system.pformatted.cpu(80)},
-                                          {timeout = 2, widget = redflat.gauge.monitor.circle})
+sysmon.widget.cpu = redflat.widget.sysmon({
+    func = redflat.system.pformatted.cpu(80)
+}, {timeout = 2, widget = redflat.gauge.monitor.circle})
 
-sysmon.buttons.cpu = awful.util.table.join(awful.button({}, 1, function() redflat.float.top:show("cpu") end))
+sysmon.buttons.cpu = awful.util.table.join(
+                         awful.button({}, 1, function()
+        redflat.float.top:show("cpu")
+    end))
 
 -- RAM usage
-sysmon.widget.ram = redflat.widget.sysmon({func = redflat.system.pformatted.mem(80)},
-                                          {timeout = 10, widget = redflat.gauge.monitor.circle})
+sysmon.widget.ram = redflat.widget.sysmon({
+    func = redflat.system.pformatted.mem(80)
+}, {timeout = 10, widget = redflat.gauge.monitor.circle})
 
-sysmon.buttons.ram = awful.util.table.join(awful.button({}, 1, function() redflat.float.top:show("mem") end))
+sysmon.buttons.ram = awful.util.table.join(
+                         awful.button({}, 1, function()
+        redflat.float.top:show("mem")
+    end))
 
 -- Screen setup
 -----------------------------------------------------------------------------------------------------------------------
@@ -195,39 +241,69 @@ awful.screen.connect_for_each_screen(function(s)
     env.wallpaper(s)
 
     -- tags
-    awful.tag({"Web", "File", "Edit", "Read", "Media", "Chats"}, s, {al[5], al[6], al[6], al[4], al[5], al[3]})
+    awful.tag({"Web", "File", "Edit", "Read", "Media", "Chats"}, s,
+              {al[5], al[6], al[6], al[4], al[5], al[3]})
 
     -- layoutbox widget
     layoutbox[s] = redflat.widget.layoutbox({screen = s})
 
     -- taglist widget
-    taglist[s] = redflat.widget.taglist({screen = s, buttons = taglist.buttons, hint = env.tagtip}, taglist.style)
+    taglist[s] = redflat.widget.taglist({
+        screen = s,
+        buttons = taglist.buttons,
+        hint = env.tagtip
+    }, taglist.style)
 
     -- tasklist widget
-    tasklist[s] = redflat.widget.tasklist({screen = s, buttons = tasklist.buttons}, tasklist.style)
+    tasklist[s] = redflat.widget.tasklist({
+        screen = s,
+        buttons = tasklist.buttons
+    }, tasklist.style)
 
     -- panel wibox
-    s.panel = awful.wibar({position = "bottom", screen = s, height = beautiful.panel_height or 36})
+    s.panel = awful.wibar({
+        position = "bottom",
+        screen = s,
+        height = beautiful.panel_height or 36
+    })
 
     -- add widgets to the wibox
     s.panel:setup{
-            layout = wibox.layout.align.horizontal, { -- left widgets
-            layout = wibox.layout.fixed.horizontal, env.wrapper(layoutbox[s], "layoutbox", layoutbox.buttons), separator,
-            env.wrapper(taglist[s], "taglist"), separator
-        }, { -- middle widget
-            layout = wibox.layout.align.horizontal, expand = "outside", nil, env.wrapper(tasklist[s], "tasklist")
-        }, { -- right widgets
-            layout = wibox.layout.fixed.horizontal, separator, env.wrapper(kbindicator.widget, "keyboard", kbindicator.buttons),
+        layout = wibox.layout.align.horizontal,
+        { -- left widgets
+            layout = wibox.layout.fixed.horizontal,
+            env.wrapper(layoutbox[s], "layoutbox", layoutbox.buttons),
             separator,
-            env.wrapper(mail.widget, "mail", mail.buttons), separator, env.wrapper(sysmon.widget.network, "network"),
+            env.wrapper(taglist[s], "taglist"),
+            separator
+        },
+        { -- middle widget
+            layout = wibox.layout.align.horizontal,
+            expand = "outside",
+            nil,
+            env.wrapper(tasklist[s], "tasklist")
+        },
+        { -- right widgets
+            layout = wibox.layout.fixed.horizontal,
+            separator,
+            env.wrapper(kbindicator.widget, "keyboard", kbindicator.buttons),
+            separator,
+            env.wrapper(mail.widget, "mail", mail.buttons),
+            separator,
+            env.wrapper(sysmon.widget.network, "network"),
             separator,
             env.wrapper(sysmon.widget.net_down, "net_down"),
             env.wrapper(sysmon.widget.net_up, "net_up"),
             env.wrapper(sysmon.widget.cpu, "cpu", sysmon.buttons.cpu),
-            env.wrapper(sysmon.widget.ram, "ram", sysmon.buttons.ram), env.wrapper(sysmon.widget.battery, "battery"), separator,
-            env.wrapper(volume.widget, "volume", volume.buttons), separator,
-            env.wrapper(updates.widget, "updates", updates.buttons), separator,
-            env.wrapper(textclock.widget, "textclock", textclock.buttons), separator,
+            env.wrapper(sysmon.widget.ram, "ram", sysmon.buttons.ram),
+            env.wrapper(sysmon.widget.battery, "battery"),
+            separator,
+            env.wrapper(volume.widget, "volume", volume.buttons),
+            separator,
+            env.wrapper(updates.widget, "updates", updates.buttons),
+            separator,
+            env.wrapper(textclock.widget, "textclock", textclock.buttons),
+            separator,
             env.wrapper(tray.widget, "tray", tray.buttons)
         }
     }
@@ -237,7 +313,12 @@ end)
 -----------------------------------------------------------------------------------------------------------------------
 if not lock.desktop then
     local desktop = require("color.orange.desktop-config") -- load file with desktop widgets configuration
-    desktop:init({env = env, buttons = awful.util.table.join(awful.button({}, 3, function() mymenu.mainmenu:toggle() end))})
+    desktop:init({
+        env = env,
+        buttons = awful.util.table.join(awful.button({}, 3, function()
+            mymenu.mainmenu:toggle()
+        end))
+    })
 end
 
 -- Active screen edges
@@ -250,17 +331,17 @@ edges:init()
 local logout = require("color.blue.logout-config")
 logout:init()
 
--- Log out screen
------------------------------------------------------------------------------------------------------------------------
-local logout = require("color.blue.logout-config")
-logout:init()
-
 -- Key bindings
 -----------------------------------------------------------------------------------------------------------------------
 local appkeys = require("color.blue.appkeys-config") -- load file with application keys sheetb
 
 local hotkeys = require("color.blue.keys-config") -- load file with hotkeys configuration
-hotkeys:init({env = env, menu = mymenu.mainmenu, appkeys = appkeys, volume = volume.widget})
+hotkeys:init({
+    env = env,
+    menu = mymenu.mainmenu,
+    appkeys = appkeys,
+    volume = volume.widget
+})
 
 -- Rules
 -----------------------------------------------------------------------------------------------------------------------
